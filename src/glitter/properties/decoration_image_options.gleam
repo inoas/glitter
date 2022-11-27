@@ -27,18 +27,18 @@ pub type DecorationImageOptions {
     attachment: Attachment,
     position: AttachmentPosition,
     repeat: AttachmentRepeat,
-    size: Size,
+    size: AttachmentSize,
   )
 }
 
 pub fn defaults() {
   DecorationImageOptions(
-    attachment: AttachmentFixed(Fixed),
+    attachment: FixedAtom(Fixed),
     position: AttachmentPosition(
-      horizontal_anchor: PositionHorizontalAnchorLeft(Left),
-      horizontal_offset: PositionUnitPx(Px(0.0)),
-      vertical_anchor: PositionVerticalAnchorTop(Top),
-      vertical_offset: PositionUnitPx(Px(0.0)),
+      horizontal_anchor: HorizontalAnchorLeftAtom(Left),
+      horizontal_offset: PositionPxUnit(Px(0.0)),
+      vertical_anchor: VerticalAnchorTopAtom(Top),
+      vertical_offset: PositionPxUnit(Px(0.0)),
     ),
     repeat: AttachmentRepeatPair(x: RepeatAtom(Repeat), y: RepeatAtom(Repeat)),
     size: CoverAtom(Cover),
@@ -46,8 +46,8 @@ pub fn defaults() {
 }
 
 pub type Attachment {
-  AttachmentFixed(Fixed)
-  AttachmentScroll(Scroll)
+  FixedAtom(Fixed)
+  ScrollAtom(Scroll)
 }
 
 pub type AttachmentPosition {
@@ -60,43 +60,43 @@ pub type AttachmentPosition {
 }
 
 pub type PositionHorizontalAnchor {
-  PositionHorizontalAnchorCenter(Center)
-  PositionHorizontalAnchorLeft(Left)
-  PositionHorizontalAnchorRight(Right)
+  HorizontalAnchorCenterAtom(Center)
+  HorizontalAnchorLeftAtom(Left)
+  HorizontalAnchorRightAtom(Right)
 }
 
 pub type PositionVerticalAnchor {
-  PositionVerticalAnchorBottom(Bottom)
-  PositionVerticalAnchorCenter(Center)
-  PositionVerticalAnchorTop(Top)
+  VerticalAnchorBottomAtom(Bottom)
+  VerticalAnchorCenterAtom(Center)
+  VerticalAnchorTopAtom(Top)
 }
 
 pub type PositionUnit {
-  PositionUnitRem(Rem)
-  PositionUnitPx(Px)
-  PositionUnitPercent(Percent)
+  PositionPercentUnit(Percent)
+  PositionPxUnit(Px)
+  PositionRemUnit(Rem)
 }
 
 pub type AttachmentRepeat {
-  AttachmentRepeatValue(RepeatUnit)
   AttachmentRepeatPair(x: RepeatUnit, y: RepeatUnit)
+  AttachmentRepeatValue(RepeatUnit)
 }
 
 pub type RepeatUnit {
-  RepeatAtom(Repeat)
   NoRepeatAtom(NoRepeat)
-  SpaceAtom(Space)
+  RepeatAtom(Repeat)
   RoundAtom(Round)
+  SpaceAtom(Space)
 }
 
-pub type Size {
+pub type AttachmentSize {
   CoverAtom(Cover)
-  SizeUnitPair(x: SizeUnit, y: SizeUnit)
+  SizePair(x: SizeUnit, y: SizeUnit)
 }
 
 pub type SizeUnit {
-  SizeUnitAuto(Auto)
-  SizeUnitRem(Rem)
-  SizeUnitPx(Px)
-  SizeUnitPercent(Percent)
+  SizeAutoAtom(Auto)
+  SizePercentUnit(Percent)
+  SizePxUnit(Px)
+  SizeRemUnit(Rem)
 }
