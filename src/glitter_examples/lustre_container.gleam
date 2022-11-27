@@ -35,9 +35,13 @@ fn render(_state) {
 }
 
 pub fn glitter_example() {
-  let container =
-    Container(
-      widget: Text("Foo"),
+  Container(
+    options: ContainerOptions(
+      ..container_options.defaults(),
+      background_color: color.blue(),
+      padding: padding.symmetric(8.0, 16.0),
+    ),
+    widget: Container(
       options: ContainerOptions(
         ..container_options.defaults(),
         background_color: color.red(),
@@ -45,7 +49,7 @@ pub fn glitter_example() {
           ..box_decoration.none(),
           border: border.all(5.0),
           image: Some(DecorationImage(
-            path_or_url: "/foo/bar.png",
+            path_or_url: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Peace_dove_%283329620077%29.jpg",
             options: DecorationImageOptions(
               ..decoration_image_options.defaults(),
               repeat: AttachmentRepeatPair(
@@ -59,10 +63,7 @@ pub fn glitter_example() {
         padding: padding.all(5.0),
         width: Some(80.0),
       ),
-    )
-
-  let container_2 =
-    Container(widget: container, options: container_options.defaults())
-
-  container_2
+      widget: Text("Hello World"),
+    ),
+  )
 }

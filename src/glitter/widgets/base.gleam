@@ -64,7 +64,7 @@ fn container_to_lustre(widget, options) {
         "padding",
         float.to_string(padding.top) <> "px " <> float.to_string(padding.right) <> "px " <> float.to_string(
           padding.bottom,
-        ) <> "px " <> float.to_string(padding.left),
+        ) <> "px " <> float.to_string(padding.left) <> "px",
       ),
       ..styles
     ]
@@ -79,7 +79,7 @@ fn container_to_lustre(widget, options) {
         "margin",
         float.to_string(margin.top) <> "px " <> float.to_string(margin.right) <> "px " <> float.to_string(
           margin.bottom,
-        ) <> "px " <> float.to_string(margin.left),
+        ) <> "px " <> float.to_string(margin.left) <> "px",
       ),
       ..styles
     ]
@@ -94,6 +94,7 @@ fn container_to_lustre(widget, options) {
   let attributes = [lustre_style(styles)]
   let widget = to_lustre(widget)
   // let widget = lustre_text(string.inspect(widget))
+  // let widget = lustre_text(string.inspect(attributes))
   lustre_div(attributes, [widget])
 }
 

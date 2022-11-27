@@ -21,11 +21,6 @@ pub fn all(n: Float) -> Padding {
   Padding(left: n, top: n, right: n, bottom: n)
 }
 
-pub fn symmetric(
-  vertical v: Option(Float),
-  horizontal h: Option(Float),
-) -> Padding {
-  let h = option.unwrap(h, or: 0.0)
-  let v = option.unwrap(v, or: 0.0)
+pub fn symmetric(vertical v: Float, horizontal h: Float) -> Padding {
   Padding(left: h, top: v, right: h, bottom: v)
 }
