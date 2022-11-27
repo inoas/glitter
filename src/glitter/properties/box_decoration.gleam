@@ -11,7 +11,7 @@ pub type BoxDecoration {
     border_radius: BorderRadius,
     box_shadows: List(BoxShadow),
     color: Color,
-    decoration_image: Option(DecorationImage),
+    image: Option(DecorationImage),
   )
 }
 
@@ -21,6 +21,6 @@ pub fn none() -> BoxDecoration {
     border_radius: border_radius.none(),
     box_shadows: [],
     color: color.none(),
-    decoration_image: None,
+    image: None,
   )
 }
