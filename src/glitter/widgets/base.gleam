@@ -1,14 +1,102 @@
 import glitter/widgets/container_options.{ContainerOptions}
+import glitter/properties/color
+import glitter/properties/padding
+import glitter/properties/margin
+import lustre/element.{div as lustre_div, p as lustre_p, text as lustre_text}
+import gleam/int
+import gleam/float
+import gleam/string
+import lustre/attribute.{style as lustre_style}
+import gleam/option.{None, Some}
 
 pub type Widget {
-  ContainerWidget(Container)
-  TextWidget(Text)
-}
-
-pub type Container {
   Container(widget: Widget, options: ContainerOptions)
+  Text(string: String)
 }
 
-pub type Text {
-  Text(string: String)
+pub fn to_lustre(widget: Widget) {
+  case widget {
+    Container(widget, options) -> container_to_lustre(widget, options)
+    Text(string) -> text_to_lustre(string)
+    _ -> lustre_div([], [])
+  }
+}
+
+fn container_to_lustre(widget, options) {
+  let ContainerOptions(
+    background_color: color,
+    decoration: _decoration,
+    height: height,
+    margin: margin,
+    padding: padding,
+    width: width,
+  ) = options
+
+  let styles = [#("display", "flex")]
+
+  // background-color
+  let color_none = color.rgba(color.none())
+  let styles = case color.rgba(color) {
+    color if color == color_none -> styles
+    color -> [
+      #(
+        "backgroundColor",
+        "rgba(" <> int.to_string(color.0) <> ", " <> int.to_string(color.1) <> ", " <> int.to_string(
+          color.2,
+        ) <> ", " <> float.to_string(color.3) <> ")",
+      ),
+      ..styles
+    ]
+  }
+
+  // height
+  let styles = case height {
+    None -> styles
+    Some(height) -> [#("height", float.to_string(height) <> "px"), ..styles]
+  }
+
+  // padding
+  let padding_none = padding.none()
+  let styles = case padding {
+    padding if padding == padding_none -> styles
+    padding -> [
+      #(
+        "padding",
+        float.to_string(padding.top) <> "px " <> float.to_string(padding.right) <> "px " <> float.to_string(
+          padding.bottom,
+        ) <> "px " <> float.to_string(padding.left),
+      ),
+      ..styles
+    ]
+  }
+
+  // margin
+  let margin_none = margin.none()
+  let styles = case margin {
+    margin if margin == margin_none -> styles
+    margin -> [
+      #(
+        "margin",
+        float.to_string(margin.top) <> "px " <> float.to_string(margin.right) <> "px " <> float.to_string(
+          margin.bottom,
+        ) <> "px " <> float.to_string(margin.left),
+      ),
+      ..styles
+    ]
+  }
+
+  // width
+  let styles = case width {
+    None -> styles
+    Some(width) -> [#("width", float.to_string(width) <> "px"), ..styles]
+  }
+
+  let attributes = [lustre_style(styles)]
+  let widget = to_lustre(widget)
+  // let widget = lustre_text(string.inspect(widget))
+  lustre_div(attributes, [widget])
+}
+
+fn text_to_lustre(string) {
+  lustre_text(string)
 }

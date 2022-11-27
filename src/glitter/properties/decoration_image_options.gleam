@@ -96,7 +96,7 @@ pub type AttachmentSize {
 
 pub type SizeUnit {
   SizeAutoAtom(Auto)
-  SizePercentUnit(Percent)
-  SizePxUnit(Px)
   SizeRemUnit(Rem)
+  SizePxUnit(Px)
+  SizePercentUnit(Percent)
 }

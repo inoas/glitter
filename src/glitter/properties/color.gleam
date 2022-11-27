@@ -2,14 +2,24 @@ pub opaque type Color {
   Color(red: Int, green: Int, blue: Int, alpha: Float)
 }
 
-pub fn rgb(red r: Int, green g: Int, blue b: Int) -> Result(Color, Nil) {
+pub fn rgb(color c: Color) -> #(Int, Int, Int) {
+  let Color(red: r, green: g, blue: b, alpha: _a) = c
+  #(r, g, b)
+}
+
+pub fn rgba(color c: Color) -> #(Int, Int, Int, Float) {
+  let Color(red: r, green: g, blue: b, alpha: a) = c
+  #(r, g, b, a)
+}
+
+pub fn from_rgb(red r: Int, green g: Int, blue b: Int) -> Result(Color, Nil) {
   case is_valid_rgb_value(r), is_valid_rgb_value(g), is_valid_rgb_value(b) {
     True, True, True -> Ok(Color(r, g, b, 0.0))
     _, _, _ -> Error(Nil)
   }
 }
 
-pub fn rgba(
+pub fn from_rgba(
   red r: Int,
   green g: Int,
   blue b: Int,

@@ -20,18 +20,18 @@ import glitter/properties/padding.{Padding}
 
 pub type ContainerOptions {
   ContainerOptions(
-    color: Color,
+    background_color: Color,
     decoration: BoxDecoration,
-    height: Option(Int),
+    height: Option(Float),
     margin: Margin,
     padding: Padding,
-    width: Option(Int),
+    width: Option(Float),
   )
 }
 
 pub fn defaults() {
   ContainerOptions(
-    color: color.none(),
+    background_color: color.none(),
     decoration: box_decoration.none(),
     height: None,
     margin: margin.none(),
