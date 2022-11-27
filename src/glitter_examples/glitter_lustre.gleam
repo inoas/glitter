@@ -1,13 +1,6 @@
 import gleam/int
 import gleam/option.{Some}
-import glitter/atoms/no_repeat.{NoRepeat}
-import glitter/properties/border
-import glitter/properties/box_decoration.{BoxDecoration}
 import glitter/properties/color
-import glitter/properties/decoration_image_options.{
-  AttachmentRepeatPair, DecorationImageOptions, NoRepeatAtom,
-}
-import glitter/properties/decoration_image.{DecorationImage}
 import glitter/properties/margin
 import glitter/properties/padding
 import glitter/widgets/base.{Column, Container, ElevatedButton, Row, Text}
