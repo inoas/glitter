@@ -88,6 +88,10 @@ pub fn blue() {
   Color(red: 0, green: 0, blue: 255, alpha: 1.0)
 }
 
+pub fn faff() {
+  Color(red: 255, green: 175, blue: 243, alpha: 1.0)
+}
+
 fn is_valid_rgb_value(rgb_value v: Int) -> Bool {
   v >= 0 && v <= 255
 }

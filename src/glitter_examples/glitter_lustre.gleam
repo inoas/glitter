@@ -1,20 +1,22 @@
+import gleam/int
 import gleam/option.{Some}
 import glitter/atoms/no_repeat.{NoRepeat}
 import glitter/properties/border
 import glitter/properties/box_decoration.{BoxDecoration}
 import glitter/properties/color
-import glitter/properties/margin
 import glitter/properties/decoration_image_options.{
   AttachmentRepeatPair, DecorationImageOptions, NoRepeatAtom,
 }
 import glitter/properties/decoration_image.{DecorationImage}
+import glitter/properties/margin
 import glitter/properties/padding
-import glitter/widgets/base.{Container, ElevatedButton}
+import glitter/widgets/base.{Column, Container, ElevatedButton, Row, Text}
+import glitter/widgets/column_options
 import glitter/widgets/container_options.{ContainerOptions}
+import glitter/widgets/row_options
 import lustre
 import lustre/cmd
 import lustre/event.{dispatch as lustre_dispatch}
-import gleam/int
 
 pub fn main() {
   let app = lustre.application(#(0, cmd.none()), update, render)
@@ -42,36 +44,30 @@ pub fn glitter_example(state) {
   Container(
     options: ContainerOptions(
       ..container_options.defaults(),
-      background_color: color.blue(),
-      margin: margin.new(4.0, 8.0, 12.0, 16.0),
+      background_color: color.black(),
+      margin: margin.new(50.0, 50.0, 50.0, 50.0),
       padding: padding.symmetric(8.0, 16.0),
     ),
     widget: Container(
       options: ContainerOptions(
         ..container_options.defaults(),
-        background_color: color.red(),
-        decoration: // Not implemented for rendering
-        BoxDecoration(
-          ..box_decoration.none(),
-          border: border.all(5.0),
-          image: Some(DecorationImage(
-            path_or_url: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Peace_dove_%283329620077%29.jpg",
-            options: DecorationImageOptions(
-              ..decoration_image_options.defaults(),
-              repeat: AttachmentRepeatPair(
-                x: NoRepeatAtom(NoRepeat),
-                y: NoRepeatAtom(NoRepeat),
-              ),
-            ),
-          )),
-        ),
+        background_color: color.faff(),
         height: Some(120.0),
         padding: padding.all(5.0),
         width: Some(200.0),
       ),
-      widget: ElevatedButton(
-        label: int.to_string(state) <> " - Increment",
-        on_pressed: lustre_dispatch(Incr),
+      widget: Column(
+        options: column_options.defaults(),
+        widgets: [
+          Text("Counter: " <> int.to_string(state)),
+          Row(
+            options: row_options.defaults(),
+            widgets: [
+              ElevatedButton(label: "+", on_pressed: lustre_dispatch(Incr)),
+              ElevatedButton(label: "-", on_pressed: lustre_dispatch(Decr)),
+            ],
+          ),
+        ],
       ),
     ),
   )

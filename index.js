@@ -1,3 +1,3 @@
-import { main } from "./build/dev/javascript/glitter/glitter_examples/lustre_container.mjs";
+import { main } from "./build/dev/javascript/glitter/glitter_examples/glitter_lustre.mjs";
 
 main()

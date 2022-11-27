@@ -12,8 +12,8 @@ import glitter/widgets/base.{Container, Text}
 import glitter/widgets/container_options.{ContainerOptions}
 
 pub fn example() {
-  let container =
-    Container(
+  Container(
+    widget: Container(
       widget: Text("Foo"),
       options: ContainerOptions(
         ..container_options.defaults(),
@@ -33,11 +33,8 @@ pub fn example() {
           )),
         ),
       ),
-    )
-
-  let container_2 =
-    Container(widget: container, options: container_options.defaults())
-
-  io.debug(container_2)
-  Nil
+    ),
+    options: container_options.defaults(),
+  )
+  |> io.debug
 }

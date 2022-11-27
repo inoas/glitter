@@ -1,4 +1,6 @@
 import glitter/widgets/container_options.{ContainerOptions}
+import glitter/widgets/column_options.{ColumnOptions}
+import glitter/widgets/row_options.{RowOptions}
 import glitter/properties/color
 import glitter/properties/padding
 import glitter/properties/margin
@@ -11,10 +13,13 @@ import gleam/float
 import lustre/attribute.{classes as lustre_classes, style as lustre_style}
 import gleam/option.{None, Some}
 import lustre/event.{on_click as lustre_on_click}
+import gleam/list
 
 pub type Widget(action) {
-  Container(widget: Widget(action), options: ContainerOptions)
   Text(body: String)
+  Container(widget: Widget(action), options: ContainerOptions)
+  Column(widgets: List(Widget(action)), options: ColumnOptions)
+  Row(widgets: List(Widget(action)), options: RowOptions)
   TextButton(label: String, on_pressed: fn(action) -> Nil)
   ElevatedButton(label: String, on_pressed: fn(action) -> Nil)
   OutlinedButton(label: String, on_pressed: fn(action) -> Nil)
@@ -22,14 +27,23 @@ pub type Widget(action) {
 
 pub fn to_lustre(widget: Widget(action)) {
   case widget {
-    Container(widget, options) -> container_to_lustre(widget, options)
-    Text(body) -> text_to_lustre(body)
-    TextButton(label, on_pressed) -> text_button_to_lustre(label, on_pressed)
-    ElevatedButton(label, on_pressed) ->
+    Text(body: body) -> text_to_lustre(body)
+    Container(widget: widget, options: options) ->
+      container_to_lustre(widget, options)
+    Column(widgets: widgets, options: options) ->
+      column_to_lustre(widgets, options)
+    Row(widgets: widgets, options: options) -> row_to_lustre(widgets, options)
+    TextButton(label: label, on_pressed: on_pressed) ->
+      text_button_to_lustre(label, on_pressed)
+    ElevatedButton(label: label, on_pressed: on_pressed) ->
       elevated_button_to_lustre(label, on_pressed)
-    OutlinedButton(label, on_pressed) ->
+    OutlinedButton(label: label, on_pressed: on_pressed) ->
       outlined_button_to_lustre(label, on_pressed)
   }
+}
+
+fn text_to_lustre(string) {
+  lustre_text(string)
 }
 
 fn container_to_lustre(widget, options) {
@@ -112,26 +126,61 @@ fn container_to_lustre(widget, options) {
   lustre_div(attributes, [widget])
 }
 
-fn text_to_lustre(string) {
-  lustre_text(string)
+fn column_to_lustre(widgets, options) {
+  let ColumnOptions(main_axis_alignment: _main_axis_alignment) = options
+  let attributes = [lustre_classes([#("column", True)])]
+  let widgets = list.map(widgets, to_lustre)
+  lustre_div(attributes, widgets)
 }
 
-fn outlined_button_to_lustre(string, on_pressed) {
-  button_to_lustre(string, on_pressed, "outlined-button")
+fn row_to_lustre(widgets, options) {
+  let RowOptions(main_axis_alignment: _main_axis_alignment) = options
+  let attributes = [lustre_classes([#("row", True)])]
+  let widgets = list.map(widgets, to_lustre)
+  lustre_div(attributes, widgets)
 }
 
-fn text_button_to_lustre(string, on_pressed) {
-  button_to_lustre(string, on_pressed, "text-button")
+fn outlined_button_to_lustre(
+  label label: String,
+  on_pressed on_pressed: fn(action) -> Nil,
+) {
+  button_to_lustre(
+    label: label,
+    on_pressed: on_pressed,
+    style_class_name: "outlined-button",
+  )
 }
 
-fn elevated_button_to_lustre(string, on_pressed) {
-  button_to_lustre(string, on_pressed, "elevated-button")
+fn text_button_to_lustre(
+  label label: String,
+  on_pressed on_pressed: fn(action) -> Nil,
+) {
+  button_to_lustre(
+    label: label,
+    on_pressed: on_pressed,
+    style_class_name: "text-button",
+  )
 }
 
-fn button_to_lustre(string, on_pressed, style_class_name: String) {
+fn elevated_button_to_lustre(
+  label label: String,
+  on_pressed on_pressed: fn(action) -> Nil,
+) {
+  button_to_lustre(
+    label: label,
+    on_pressed: on_pressed,
+    style_class_name: "elevated-button",
+  )
+}
+
+fn button_to_lustre(
+  label label: String,
+  on_pressed on_pressed,
+  style_class_name style_class_name: String,
+) {
   let classes = lustre_classes([#("button", True), #(style_class_name, True)])
   let attributes = [classes]
   let attributes = [lustre_on_click(on_pressed), ..attributes]
-  let children = [lustre_text(string)]
+  let children = [lustre_text(label)]
   lustre_button(attributes, children)
 }
