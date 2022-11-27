@@ -15,6 +15,8 @@ import lustre/event.{on_click as lustre_on_click}
 pub type Widget(action) {
   Container(widget: Widget(action), options: ContainerOptions)
   Text(body: String)
+  TextButton(label: String, on_pressed: fn(action) -> Nil)
+  ElevatedButton(label: String, on_pressed: fn(action) -> Nil)
   OutlinedButton(label: String, on_pressed: fn(action) -> Nil)
 }
 
@@ -22,6 +24,9 @@ pub fn to_lustre(widget: Widget(action)) {
   case widget {
     Container(widget, options) -> container_to_lustre(widget, options)
     Text(body) -> text_to_lustre(body)
+    TextButton(label, on_pressed) -> text_button_to_lustre(label, on_pressed)
+    ElevatedButton(label, on_pressed) ->
+      elevated_button_to_lustre(label, on_pressed)
     OutlinedButton(label, on_pressed) ->
       outlined_button_to_lustre(label, on_pressed)
   }
@@ -108,7 +113,19 @@ fn text_to_lustre(string) {
 }
 
 fn outlined_button_to_lustre(string, on_pressed) {
-  let classes = lustre_classes([#("button", True), #("button-outlined", True)])
+  button_to_lustre(string, on_pressed, "outlined-button")
+}
+
+fn text_button_to_lustre(string, on_pressed) {
+  button_to_lustre(string, on_pressed, "text-button")
+}
+
+fn elevated_button_to_lustre(string, on_pressed) {
+  button_to_lustre(string, on_pressed, "elevated-button")
+}
+
+fn button_to_lustre(string, on_pressed, style_class_name: String) {
+  let classes = lustre_classes([#("button", True), #(style_class_name, True)])
   let attributes = [classes]
   let attributes = [lustre_on_click(on_pressed), ..attributes]
   let children = [lustre_text(string)]

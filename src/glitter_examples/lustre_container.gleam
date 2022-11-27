@@ -9,7 +9,7 @@ import glitter/properties/decoration_image_options.{
 }
 import glitter/properties/decoration_image.{DecorationImage}
 import glitter/properties/padding
-import glitter/widgets/base.{Container, OutlinedButton}
+import glitter/widgets/base.{Container, ElevatedButton}
 import glitter/widgets/container_options.{ContainerOptions}
 import lustre
 import lustre/cmd
@@ -68,7 +68,7 @@ pub fn glitter_example(state) {
         padding: padding.all(5.0),
         width: Some(200.0),
       ),
-      widget: OutlinedButton(
+      widget: ElevatedButton(
         label: int.to_string(state) <> " - Increment",
         on_pressed: lustre_dispatch(Incr),
       ),
