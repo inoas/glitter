@@ -9,11 +9,11 @@ import glitter/properties/decoration_image_options.{
 }
 import glitter/properties/decoration_image.{DecorationImage}
 import glitter/properties/padding
-import glitter/widgets/base.{Container, OutlinedButton, Text}
+import glitter/widgets/base.{Container, OutlinedButton}
 import glitter/widgets/container_options.{ContainerOptions}
 import lustre
 import lustre/cmd
-import lustre/event.{dispatch as lustre_dispatch, on_click as lustre_on_click}
+import lustre/event.{dispatch as lustre_dispatch}
 import gleam/int
 
 pub fn main() {

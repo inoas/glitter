@@ -8,7 +8,7 @@ import lustre/element.{
 import gleam/int
 import gleam/float
 // import gleam/string
-import lustre/attribute.{style as lustre_style}
+import lustre/attribute.{classes as lustre_classes, style as lustre_style}
 import gleam/option.{None, Some}
 import lustre/event.{on_click as lustre_on_click}
 
@@ -108,5 +108,9 @@ fn text_to_lustre(string) {
 }
 
 fn outlined_button_to_lustre(string, on_pressed) {
-  lustre_button([lustre_on_click(on_pressed)], [lustre_text(string)])
+  let classes = lustre_classes([#("button", True), #("button-outlined", True)])
+  let attributes = [classes]
+  let attributes = [lustre_on_click(on_pressed), ..attributes]
+  let children = [lustre_text(string)]
+  lustre_button(attributes, children)
 }
