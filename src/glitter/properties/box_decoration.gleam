@@ -5,13 +5,6 @@ import glitter/properties/color.{Color}
 import glitter/properties/box_shadow.{BoxShadow}
 import glitter/properties/decoration_image.{DecorationImage}
 
-/// Not Implemented:
-/// - gradient
-/// - background-blend-mode
-/// - background-clip
-/// - background-origin
-/// - shape: Option(BoxShape) = BoxShape.rectangle
-///
 pub type BoxDecoration {
   BoxDecoration(
     border: Border,

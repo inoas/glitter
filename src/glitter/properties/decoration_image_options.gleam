@@ -15,6 +15,13 @@ import glitter/units/percent.{Percent}
 import glitter/units/px.{Px}
 import glitter/units/rem.{Rem}
 
+/// TODO:
+/// - gradient
+/// - background-blend-mode
+/// - background-clip
+/// - background-origin
+/// - shape: Option(BoxShape) = BoxShape.rectangle
+///
 pub type DecorationImageOptions {
   DecorationImageOptions(
     attachment: Attachment,
