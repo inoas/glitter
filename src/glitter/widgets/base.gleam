@@ -42,6 +42,10 @@ fn container_to_lustre(widget, options) {
     width: width,
   ) = options
 
+  let classes = lustre_classes([#("container", True)])
+
+  let attributes = [classes]
+
   let styles = [#("display", "flex")]
 
   // background-color
@@ -101,7 +105,7 @@ fn container_to_lustre(widget, options) {
     Some(width) -> [#("width", float.to_string(width) <> "px"), ..styles]
   }
 
-  let attributes = [lustre_style(styles)]
+  let attributes = [lustre_style(styles), ..attributes]
   let widget = to_lustre(widget)
   // let widget = lustre_text(string.inspect(widget))
   // let widget = lustre_text(string.inspect(attributes))

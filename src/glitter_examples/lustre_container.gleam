@@ -34,7 +34,8 @@ fn update(state, action) {
 }
 
 fn render(state) {
-  base.to_lustre(glitter_example(state))
+  glitter_example(state)
+  |> base.to_lustre()
 }
 
 pub fn glitter_example(state) {
