@@ -2,23 +2,28 @@ import glitter/widgets/container_options.{ContainerOptions}
 import glitter/properties/color
 import glitter/properties/padding
 import glitter/properties/margin
-import lustre/element.{div as lustre_div, p as lustre_p, text as lustre_text}
+import lustre/element.{
+  button as lustre_button, div as lustre_div, text as lustre_text,
+}
 import gleam/int
 import gleam/float
-import gleam/string
+// import gleam/string
 import lustre/attribute.{style as lustre_style}
 import gleam/option.{None, Some}
+import lustre/event.{on_click as lustre_on_click}
 
-pub type Widget {
-  Container(widget: Widget, options: ContainerOptions)
-  Text(string: String)
+pub type Widget(action) {
+  Container(widget: Widget(action), options: ContainerOptions)
+  Text(body: String)
+  OutlinedButton(label: String, on_pressed: fn(action) -> Nil)
 }
 
-pub fn to_lustre(widget: Widget) {
+pub fn to_lustre(widget: Widget(action)) {
   case widget {
     Container(widget, options) -> container_to_lustre(widget, options)
-    Text(string) -> text_to_lustre(string)
-    _ -> lustre_div([], [])
+    Text(body) -> text_to_lustre(body)
+    OutlinedButton(label, on_pressed) ->
+      outlined_button_to_lustre(label, on_pressed)
   }
 }
 
@@ -100,4 +105,8 @@ fn container_to_lustre(widget, options) {
 
 fn text_to_lustre(string) {
   lustre_text(string)
+}
+
+fn outlined_button_to_lustre(string, on_pressed) {
+  lustre_button([lustre_on_click(on_pressed)], [lustre_text(string)])
 }

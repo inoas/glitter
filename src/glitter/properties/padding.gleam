@@ -1,5 +1,3 @@
-import gleam/option.{Option}
-
 pub type Padding {
   Padding(left: Float, top: Float, right: Float, bottom: Float)
 }

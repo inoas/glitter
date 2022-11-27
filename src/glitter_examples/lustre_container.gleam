@@ -9,10 +9,12 @@ import glitter/properties/decoration_image_options.{
 }
 import glitter/properties/decoration_image.{DecorationImage}
 import glitter/properties/padding
-import glitter/widgets/base.{Container, Text}
+import glitter/widgets/base.{Container, OutlinedButton, Text}
 import glitter/widgets/container_options.{ContainerOptions}
 import lustre
 import lustre/cmd
+import lustre/event.{dispatch as lustre_dispatch, on_click as lustre_on_click}
+import gleam/int
 
 pub fn main() {
   let app = lustre.application(#(0, cmd.none()), update, render)
@@ -31,11 +33,11 @@ fn update(state, action) {
   }
 }
 
-fn render(_state) {
-  base.to_lustre(glitter_example())
+fn render(state) {
+  base.to_lustre(glitter_example(state))
 }
 
-pub fn glitter_example() {
+pub fn glitter_example(state) {
   Container(
     options: ContainerOptions(
       ..container_options.defaults(),
@@ -66,7 +68,10 @@ pub fn glitter_example() {
         padding: padding.all(5.0),
         width: Some(200.0),
       ),
-      widget: Text("Hello World!"),
+      widget: OutlinedButton(
+        label: int.to_string(state) <> " - Increment",
+        on_pressed: lustre_dispatch(Incr),
+      ),
     ),
   )
 }
