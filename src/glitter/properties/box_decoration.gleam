@@ -31,19 +31,3 @@ pub fn none() -> BoxDecoration {
     decoration_image: None,
   )
 }
-
-pub fn new(
-  border b: Border,
-  border_radius br: BorderRadius,
-  box_shadows bss: List(BoxShadow),
-  color c: Color,
-  decoration_image di: Option(DecorationImage),
-) -> BoxDecoration {
-  BoxDecoration(
-    border: b,
-    border_radius: br,
-    box_shadows: bss,
-    color: c,
-    decoration_image: di,
-  )
-}

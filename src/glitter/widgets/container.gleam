@@ -1,4 +1,4 @@
-import glitter/widgets/container/container_options.{ContainerOptions}
+import glitter/widgets/container_options.{ContainerOptions}
 import glitter/widgets/text.{Text}
 
 pub type Container {
