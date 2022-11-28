@@ -28,7 +28,10 @@ fn render(state) {
     options: ContainerOptions(
       ..container_options.defaults(),
       background_color: color.black(),
-      margin: margin.new(50.0, 50.0, 50.0, 50.0),
+      margin: margin.with_horizontal_auto(margin.symmetric_px(
+        vertical: 10.0,
+        horizontal: 0.0,
+      )),
       padding: padding.symmetric(8.0, 16.0),
     ),
     widget: Container(
@@ -37,6 +40,7 @@ fn render(state) {
         background_color: color.faff(),
         height: Some(120.0),
         padding: padding.all(5.0),
+        margin: margin.px(50.0, 50.0, 50.0, 50.0),
         width: Some(200.0),
       ),
       widget: Column(

@@ -3,7 +3,6 @@ import glitter/widgets/column_options.{ColumnOptions}
 import glitter/widgets/row_options.{RowOptions}
 import glitter/properties/color
 import glitter/properties/padding
-import glitter/properties/margin
 import lustre/element.{
   button as lustre_button, div as lustre_div, text as lustre_text,
 }
@@ -14,6 +13,13 @@ import lustre/attribute.{classes as lustre_classes, style as lustre_style}
 import gleam/option.{None, Some}
 import lustre/event.{on_click as lustre_on_click}
 import gleam/list
+import glitter/properties/margin.{
+  MarginAutoAtom, MarginPercentUnit, MarginPxUnit, MarginRemUnit,
+}
+import glitter/atoms/auto.{Auto}
+import glitter/units/rem.{Rem}
+import glitter/units/px.{Px}
+import glitter/units/percent.{Percent}
 
 pub type Widget(action) {
   Text(body: String)
@@ -99,14 +105,23 @@ fn container_to_lustre(widget, options) {
 
   // margin
   let margin_none = margin.none()
+  let margin_to_unit = fn(margin) {
+    case margin {
+      MarginAutoAtom(Auto) -> "auto"
+      MarginRemUnit(Rem(rem_value)) -> float.to_string(rem_value) <> "rem"
+      MarginPxUnit(Px(px_value)) -> float.to_string(px_value) <> "px"
+      MarginPercentUnit(Percent(percent_value)) ->
+        float.to_string(percent_value) <> "%"
+    }
+  }
   let styles = case margin {
     margin if margin == margin_none -> styles
     margin -> [
       #(
         "margin",
-        float.to_string(margin.top) <> "px " <> float.to_string(margin.right) <> "px " <> float.to_string(
+        margin_to_unit(margin.top) <> " " <> margin_to_unit(margin.right) <> " " <> margin_to_unit(
           margin.bottom,
-        ) <> "px " <> float.to_string(margin.left) <> "px",
+        ) <> " " <> margin_to_unit(margin.left),
       ),
       ..styles
     ]
