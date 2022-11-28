@@ -68,7 +68,7 @@ pub type AttachmentPositionUnit {
 }
 
 pub type AttachmentRepeat {
-  AttachmentRepeatPair(x: Repetition, y: Repetition)
+  AttachmentRepeats(x: Repetition, y: Repetition)
   AttachmentRepeat(Repetition)
 }
 
@@ -81,7 +81,7 @@ pub type Repetition {
 
 pub type AttachmentSize {
   AttachmentSizeCover(Cover)
-  AttachmentSizePair(x: AttachmentSizeUnit, y: AttachmentSizeUnit)
+  AttachmentSizes(x: AttachmentSizeUnit, y: AttachmentSizeUnit)
 }
 
 pub type AttachmentSizeUnit {
@@ -102,7 +102,7 @@ pub fn defaults() {
       vertical_anchor: VerticalAnchorTop(Top),
       vertical_offset: AttachmentPositionPx(Px(0.0)),
     ),
-    repeat: AttachmentRepeatPair(
+    repeat: AttachmentRepeats(
       x: RepetitionRepeat(Repeat),
       y: RepetitionRepeat(Repeat),
     ),
