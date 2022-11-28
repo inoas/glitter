@@ -17,7 +17,7 @@ pub fn example() {
       widget: Text("Foo"),
       options: ContainerOptions(
         ..container_options.defaults(),
-        padding: padding.all(5.0),
+        padding: padding.all_px(5.0),
         decoration: BoxDecoration(
           ..box_decoration.none(),
           border: border.all(5.0),

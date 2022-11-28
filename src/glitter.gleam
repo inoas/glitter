@@ -1,25 +1,26 @@
-import glitter/widgets/container_options.{ContainerOptions}
-import glitter/widgets/column_options.{ColumnOptions}
-import glitter/widgets/row_options.{RowOptions}
-import glitter/properties/color
-import glitter/properties/padding
-import lustre/element.{
-  button as lustre_button, div as lustre_div, text as lustre_text,
-}
-import gleam/int
 import gleam/float
-// import gleam/string
-import lustre/attribute.{classes as lustre_classes, style as lustre_style}
-import gleam/option.{None, Some}
-import lustre/event.{on_click as lustre_on_click}
+import gleam/int
 import gleam/list
+import gleam/option.{None, Some}
+import glitter/atoms/auto.{Auto}
+import glitter/properties/color
 import glitter/properties/margin.{
   MarginAutoAtom, MarginPercentUnit, MarginPxUnit, MarginRemUnit,
 }
-import glitter/atoms/auto.{Auto}
-import glitter/units/rem.{Rem}
-import glitter/units/px.{Px}
+import glitter/properties/padding.{
+  PaddingPercentUnit, PaddingPxUnit, PaddingRemUnit,
+}
 import glitter/units/percent.{Percent}
+import glitter/units/px.{Px}
+import glitter/units/rem.{Rem}
+import glitter/widgets/column_options.{ColumnOptions}
+import glitter/widgets/container_options.{ContainerOptions}
+import glitter/widgets/row_options.{RowOptions}
+import lustre/attribute.{classes as lustre_classes, style as lustre_style}
+import lustre/element.{
+  button as lustre_button, div as lustre_div, text as lustre_text,
+}
+import lustre/event.{on_click as lustre_on_click}
 
 pub type Widget(action) {
   Text(body: String)
@@ -90,14 +91,22 @@ fn container_to_lustre(widget, options) {
 
   // padding
   let padding_none = padding.none()
+  let padding_to_unit = fn(padding) {
+    case padding {
+      PaddingRemUnit(Rem(rem_value)) -> float.to_string(rem_value) <> "rem"
+      PaddingPxUnit(Px(px_value)) -> float.to_string(px_value) <> "px"
+      PaddingPercentUnit(Percent(percent_value)) ->
+        float.to_string(percent_value) <> "%"
+    }
+  }
   let styles = case padding {
     padding if padding == padding_none -> styles
     padding -> [
       #(
         "padding",
-        float.to_string(padding.top) <> "px " <> float.to_string(padding.right) <> "px " <> float.to_string(
+        padding_to_unit(padding.top) <> " " <> padding_to_unit(padding.right) <> " " <> padding_to_unit(
           padding.bottom,
-        ) <> "px " <> float.to_string(padding.left) <> "px",
+        ) <> " " <> padding_to_unit(padding.left),
       ),
       ..styles
     ]

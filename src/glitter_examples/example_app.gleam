@@ -32,14 +32,14 @@ fn render(state) {
         vertical: 10.0,
         horizontal: 0.0,
       )),
-      padding: padding.symmetric(8.0, 16.0),
+      padding: padding.symmetric_px(8.0, 16.0),
     ),
     widget: Container(
       options: ContainerOptions(
         ..container_options.defaults(),
         background_color: color.faff(),
         height: Some(120.0),
-        padding: padding.all(5.0),
+        padding: padding.all_px(5.0),
         margin: margin.px(50.0, 50.0, 50.0, 50.0),
         width: Some(200.0),
       ),
