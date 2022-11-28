@@ -6,7 +6,7 @@ import glitter/units/vh.{Vh}
 import glitter/units/vw.{Vw}
 
 pub type Size {
-  SizeAutoAtom(Auto)
+  SizeAuto(Auto)
   SizePercentUnit(Percent)
   SizePxUnit(Px)
   SizeRemUnit(Rem)

@@ -34,8 +34,8 @@ pub type DecorationImageOptions {
 }
 
 pub type Attachment {
-  FixedAtom(Fixed)
-  ScrollAtom(Scroll)
+  AttachmentFixed(Fixed)
+  AttachmentScroll(Scroll)
 }
 
 pub type AttachmentPosition {
@@ -48,15 +48,15 @@ pub type AttachmentPosition {
 }
 
 pub type HorizontalAnchorUnit {
-  HorizontalAnchorCenterAtom(Center)
-  HorizontalAnchorLeftAtom(Left)
-  HorizontalAnchorRightAtom(Right)
+  HorizontalAnchorCenter(Center)
+  HorizontalAnchorLeft(Left)
+  HorizontalAnchorRight(Right)
 }
 
 pub type VerticalAnchorUnit {
-  VerticalAnchorBottomAtom(Bottom)
-  VerticalAnchorCenterAtom(Center)
-  VerticalAnchorTopAtom(Top)
+  VerticalAnchorBottom(Bottom)
+  VerticalAnchorCenter(Center)
+  VerticalAnchorTop(Top)
 }
 
 pub type AttachmentPositionUnit {
@@ -68,24 +68,24 @@ pub type AttachmentPositionUnit {
 }
 
 pub type AttachmentRepeat {
-  AttachmentRepeatAtomPair(x: RepeatUnit, y: RepeatUnit)
-  AttachmentRepeatAtom(RepeatUnit)
+  AttachmentRepeatPair(x: RepetitionUnit, y: RepetitionUnit)
+  AttachmentRepeat(RepetitionUnit)
 }
 
-pub type RepeatUnit {
-  NoRepeatAtom(NoRepeat)
-  RepeatAtom(Repeat)
-  RoundAtom(Round)
-  SpaceAtom(Space)
+pub type RepetitionUnit {
+  RepetitionNoRepeat(NoRepeat)
+  RepetitionRepeat(Repeat)
+  RepetitionRound(Round)
+  RepetitionSpace(Space)
 }
 
 pub type AttachmentSize {
-  CoverAtom(Cover)
-  SizePair(x: AttachmentSizeUnit, y: AttachmentSizeUnit)
+  AttachmentSizeCover(Cover)
+  AttachmentSizePair(x: AttachmentSizeUnit, y: AttachmentSizeUnit)
 }
 
 pub type AttachmentSizeUnit {
-  AttachmentSizeAutoAtom(Auto)
+  AttachmentSizeAuto(Auto)
   AttachmentSizePercentUnit(Percent)
   AttachmentSizePxUnit(Px)
   AttachmentSizeRemUnit(Rem)
@@ -95,17 +95,17 @@ pub type AttachmentSizeUnit {
 
 pub fn defaults() {
   DecorationImageOptions(
-    attachment: FixedAtom(Fixed),
+    attachment: AttachmentFixed(Fixed),
     position: AttachmentPosition(
-      horizontal_anchor: HorizontalAnchorLeftAtom(Left),
+      horizontal_anchor: HorizontalAnchorLeft(Left),
       horizontal_offset: AttachmentPositionPxUnit(Px(0.0)),
-      vertical_anchor: VerticalAnchorTopAtom(Top),
+      vertical_anchor: VerticalAnchorTop(Top),
       vertical_offset: AttachmentPositionPxUnit(Px(0.0)),
     ),
-    repeat: AttachmentRepeatAtomPair(
-      x: RepeatAtom(Repeat),
-      y: RepeatAtom(Repeat),
+    repeat: AttachmentRepeatPair(
+      x: RepetitionRepeat(Repeat),
+      y: RepetitionRepeat(Repeat),
     ),
-    size: CoverAtom(Cover),
+    size: AttachmentSizeCover(Cover),
   )
 }

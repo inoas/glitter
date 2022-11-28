@@ -16,7 +16,7 @@ import glitter/properties/box_decoration.{BoxDecoration}
 import glitter/properties/color.{Color}
 import glitter/properties/margin.{Margin}
 import glitter/properties/padding.{Padding}
-import glitter/units/size.{Size, SizeAutoAtom}
+import glitter/units/size.{Size, SizeAuto}
 import glitter/atoms/auto.{Auto}
 
 pub type ContainerOptions {
@@ -34,9 +34,9 @@ pub fn defaults() {
   ContainerOptions(
     background_color: color.none(),
     decoration: box_decoration.none(),
-    height: SizeAutoAtom(Auto),
+    height: SizeAuto(Auto),
     margin: margin.none(),
     padding: padding.none(),
-    width: SizeAutoAtom(Auto),
+    width: SizeAuto(Auto),
   )
 }

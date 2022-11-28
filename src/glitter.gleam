@@ -4,7 +4,7 @@ import gleam/list
 import glitter/atoms/auto.{Auto}
 import glitter/properties/color
 import glitter/properties/margin.{
-  MarginAutoAtom, MarginPercentUnit, MarginPxUnit, MarginRemUnit, MarginVhUnit,
+  MarginAuto, MarginPercentUnit, MarginPxUnit, MarginRemUnit, MarginVhUnit,
   MarginVwUnit,
 }
 import glitter/properties/padding.{
@@ -25,7 +25,7 @@ import lustre/element.{
 }
 import lustre/event.{on_click as lustre_on_click}
 import glitter/units/size.{
-  SizeAutoAtom, SizePercentUnit, SizePxUnit, SizeRemUnit, SizeVhUnit, SizeVwUnit,
+  SizeAuto, SizePercentUnit, SizePxUnit, SizeRemUnit, SizeVhUnit, SizeVwUnit,
 }
 
 pub type Widget(action) {
@@ -91,7 +91,7 @@ fn container_to_lustre(widget, options) {
 
   let size_to_unit = fn(size) {
     case size {
-      SizeAutoAtom(Auto) -> "auto"
+      SizeAuto(Auto) -> "auto"
       SizePercentUnit(Percent(percent_value)) ->
         float.to_string(percent_value) <> "%"
       SizePxUnit(Px(px_value)) -> float.to_string(px_value) <> "px"
@@ -102,7 +102,7 @@ fn container_to_lustre(widget, options) {
   }
 
   // height
-  let height_auto = SizeAutoAtom(Auto)
+  let height_auto = SizeAuto(Auto)
   let styles = case height {
     height if height == height_auto -> styles
     height -> [#("height", size_to_unit(height)), ..styles]
@@ -138,7 +138,7 @@ fn container_to_lustre(widget, options) {
   let margin_none = margin.none()
   let margin_to_unit = fn(margin) {
     case margin {
-      MarginAutoAtom(Auto) -> "auto"
+      MarginAuto(Auto) -> "auto"
       MarginPercentUnit(Percent(percent_value)) ->
         float.to_string(percent_value) <> "%"
       MarginPxUnit(Px(px_value)) -> float.to_string(px_value) <> "px"
@@ -161,7 +161,7 @@ fn container_to_lustre(widget, options) {
   }
 
   // width
-  let width_auto = SizeAutoAtom(Auto)
+  let width_auto = SizeAuto(Auto)
   let styles = case width {
     width if width == width_auto -> styles
     width -> [#("width", size_to_unit(width)), ..styles]

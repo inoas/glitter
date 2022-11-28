@@ -15,7 +15,7 @@ pub type Margin {
 }
 
 pub type MarginUnit {
-  MarginAutoAtom(Auto)
+  MarginAuto(Auto)
   MarginPercentUnit(Percent)
   MarginPxUnit(Px)
   MarginRemUnit(Rem)
@@ -80,14 +80,14 @@ pub fn symmetric_rem(vertical v: Float, horizontal h: Float) -> Margin {
 // TODO: this should be removed in favour of using flexbox alignments
 pub fn auto_horizontal() -> Margin {
   Margin(
-    left: MarginAutoAtom(Auto),
+    left: MarginAuto(Auto),
     top: MarginPxUnit(Px(0.0)),
-    right: MarginAutoAtom(Auto),
+    right: MarginAuto(Auto),
     bottom: MarginPxUnit(Px(0.0)),
   )
 }
 
 // TODO: this should be removed in favour of using flexbox alignments
 pub fn with_auto_horizontal(margin: Margin) -> Margin {
-  Margin(..margin, left: MarginAutoAtom(Auto), right: MarginAutoAtom(Auto))
+  Margin(..margin, left: MarginAuto(Auto), right: MarginAuto(Auto))
 }
