@@ -23,9 +23,7 @@ import lustre/element.{
   button as lustre_button, div as lustre_div, text as lustre_text,
 }
 import lustre/event.{on_click as lustre_on_click}
-import glitter/units/size.{
-  SizeAuto, SizePercent, SizePx, SizeRem, SizeVh, SizeVw,
-}
+import glitter/units/size.{SizeAuto}
 
 pub type Widget(action) {
   Text(body: String)
@@ -88,23 +86,11 @@ fn container_to_lustre(widget, options) {
     ]
   }
 
-  let size_to_unit = fn(size) {
-    case size {
-      SizeAuto(Auto) -> "auto"
-      SizePercent(Percent(percent_value)) ->
-        float.to_string(percent_value) <> "%"
-      SizePx(Px(px_value)) -> float.to_string(px_value) <> "px"
-      SizeRem(Rem(rem_value)) -> float.to_string(rem_value) <> "rem"
-      SizeVh(Vh(vh_value)) -> float.to_string(vh_value) <> "vh"
-      SizeVw(Vw(vw_value)) -> float.to_string(vw_value) <> "vw"
-    }
-  }
-
   // height
   let height_auto = SizeAuto(Auto)
   let styles = case height {
     height if height == height_auto -> styles
-    height -> [#("height", size_to_unit(height)), ..styles]
+    height -> [#("height", size.to_string(height)), ..styles]
   }
 
   // padding
@@ -163,7 +149,7 @@ fn container_to_lustre(widget, options) {
   let width_auto = SizeAuto(Auto)
   let styles = case width {
     width if width == width_auto -> styles
-    width -> [#("width", size_to_unit(width)), ..styles]
+    width -> [#("width", size.to_string(width)), ..styles]
   }
 
   let attributes = [lustre_style(styles), ..attributes]
