@@ -5,14 +5,18 @@ import gleam/option.{None, Some}
 import glitter/atoms/auto.{Auto}
 import glitter/properties/color
 import glitter/properties/margin.{
-  MarginAutoAtom, MarginPercentUnit, MarginPxUnit, MarginRemUnit,
+  MarginAutoAtom, MarginPercentUnit, MarginPxUnit, MarginRemUnit, MarginVhUnit,
+  MarginVwUnit,
 }
 import glitter/properties/padding.{
-  PaddingPercentUnit, PaddingPxUnit, PaddingRemUnit,
+  PaddingPercentUnit, PaddingPxUnit, PaddingRemUnit, PaddingVhUnit,
+  PaddingVwUnit,
 }
 import glitter/units/percent.{Percent}
 import glitter/units/px.{Px}
 import glitter/units/rem.{Rem}
+import glitter/units/vh.{Vh}
+import glitter/units/vw.{Vw}
 import glitter/options/column_options.{ColumnOptions}
 import glitter/options/container_options.{ContainerOptions}
 import glitter/options/row_options.{RowOptions}
@@ -69,8 +73,8 @@ fn container_to_lustre(widget, options) {
   let styles = [#("display", "flex")]
 
   // background-color
-  let color_none = color.rgba(color.none())
-  let styles = case color.rgba(color) {
+  let color_none = color.to_rgba(color.none())
+  let styles = case color.to_rgba(color) {
     color if color == color_none -> styles
     color -> [
       #(
@@ -93,12 +97,15 @@ fn container_to_lustre(widget, options) {
   let padding_none = padding.none()
   let padding_to_unit = fn(padding) {
     case padding {
-      PaddingRemUnit(Rem(rem_value)) -> float.to_string(rem_value) <> "rem"
-      PaddingPxUnit(Px(px_value)) -> float.to_string(px_value) <> "px"
       PaddingPercentUnit(Percent(percent_value)) ->
         float.to_string(percent_value) <> "%"
+      PaddingPxUnit(Px(px_value)) -> float.to_string(px_value) <> "px"
+      PaddingRemUnit(Rem(rem_value)) -> float.to_string(rem_value) <> "rem"
+      PaddingVhUnit(Vh(vh_value)) -> float.to_string(vh_value) <> "vh"
+      PaddingVwUnit(Vw(vw_value)) -> float.to_string(vw_value) <> "vw"
     }
   }
+
   let styles = case padding {
     padding if padding == padding_none -> styles
     padding -> [
@@ -117,10 +124,12 @@ fn container_to_lustre(widget, options) {
   let margin_to_unit = fn(margin) {
     case margin {
       MarginAutoAtom(Auto) -> "auto"
-      MarginRemUnit(Rem(rem_value)) -> float.to_string(rem_value) <> "rem"
-      MarginPxUnit(Px(px_value)) -> float.to_string(px_value) <> "px"
       MarginPercentUnit(Percent(percent_value)) ->
         float.to_string(percent_value) <> "%"
+      MarginPxUnit(Px(px_value)) -> float.to_string(px_value) <> "px"
+      MarginRemUnit(Rem(rem_value)) -> float.to_string(rem_value) <> "rem"
+      MarginVhUnit(Vh(vh_value)) -> float.to_string(vh_value) <> "vh"
+      MarginVwUnit(Vw(vw_value)) -> float.to_string(vw_value) <> "vw"
     }
   }
   let styles = case margin {

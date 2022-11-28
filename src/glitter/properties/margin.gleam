@@ -1,7 +1,9 @@
+import glitter/atoms/auto.{Auto}
 import glitter/units/percent.{Percent}
 import glitter/units/px.{Px}
 import glitter/units/rem.{Rem}
-import glitter/atoms/auto.{Auto}
+import glitter/units/vh.{Vh}
+import glitter/units/vw.{Vw}
 
 pub type Margin {
   Margin(
@@ -14,9 +16,11 @@ pub type Margin {
 
 pub type MarginUnit {
   MarginAutoAtom(Auto)
-  MarginRemUnit(Rem)
   MarginPercentUnit(Percent)
   MarginPxUnit(Px)
+  MarginRemUnit(Rem)
+  MarginVhUnit(Vh)
+  MarginVwUnit(Vw)
 }
 
 pub fn none() -> Margin {
@@ -26,6 +30,15 @@ pub fn none() -> Margin {
     right: MarginPxUnit(Px(0.0)),
     bottom: MarginPxUnit(Px(0.0)),
   )
+}
+
+pub fn new(
+  left l: MarginUnit,
+  top t: MarginUnit,
+  right r: MarginUnit,
+  bottom b: MarginUnit,
+) -> Margin {
+  Margin(left: l, top: t, right: r, bottom: b)
 }
 
 pub fn all_px(n: Float) -> Margin {
@@ -64,15 +77,7 @@ pub fn symmetric_rem(vertical v: Float, horizontal h: Float) -> Margin {
   )
 }
 
-pub fn new(
-  left l: MarginUnit,
-  top t: MarginUnit,
-  right r: MarginUnit,
-  bottom b: MarginUnit,
-) -> Margin {
-  Margin(left: l, top: t, right: r, bottom: b)
-}
-
+// TODO: this should be removed in favour of using flexbox alignments
 pub fn auto_horizontal() -> Margin {
   Margin(
     left: MarginAutoAtom(Auto),
@@ -82,6 +87,7 @@ pub fn auto_horizontal() -> Margin {
   )
 }
 
+// TODO: this should be removed in favour of using flexbox alignments
 pub fn with_auto_horizontal(margin: Margin) -> Margin {
   Margin(..margin, left: MarginAutoAtom(Auto), right: MarginAutoAtom(Auto))
 }

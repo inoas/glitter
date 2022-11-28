@@ -1,29 +1,64 @@
 import glitter/properties/color.{Color}
 import glitter/properties/offset.{Offset}
+import glitter/units/percent.{Percent}
+import glitter/units/px.{Px}
+import glitter/units/rem.{Rem}
+import glitter/units/vh.{Vh}
+import glitter/units/vw.{Vw}
 
 pub type BoxShadow {
   BoxShadow(
-    blur_radius: Float,
+    blur: BoxShadowRadius,
     color: Color,
     offset: Offset,
-    spread_radius: Float,
+    spread: BoxShadowSpread,
   )
+}
+
+pub type BoxShadowSpread {
+  BoxShadowSpreadPercent(Percent)
+  BoxShadowSpreadPx(Px)
+  BoxShadowSpreadRem(Rem)
+  BoxShadowSpreadVh(Vh)
+  BoxShadowSpreadVw(Vw)
+}
+
+pub type BoxShadowRadius {
+  BoxShadowRadiusPercent(Percent)
+  BoxShadowRadiusPx(Px)
+  BoxShadowRadiusRem(Rem)
+  BoxShadowRadiusVh(Vh)
+  BoxShadowRadiusVw(Vw)
+}
+
+pub fn new(
+  blur br: BoxShadowRadius,
+  color c: Color,
+  offset os: Offset,
+  spread sr: BoxShadowSpread,
+) -> BoxShadow {
+  BoxShadow(blur: br, color: c, offset: os, spread: sr)
 }
 
 pub fn none() -> BoxShadow {
   BoxShadow(
-    blur_radius: 0.0,
+    blur: BoxShadowRadiusPx(Px(0.0)),
     color: color.none(),
     offset: offset.none(),
-    spread_radius: 0.0,
+    spread: BoxShadowSpreadPx(Px(0.0)),
   )
 }
 
-pub fn new(
-  blur_radius br: Float,
+pub fn new_px(
+  blur br: Float,
   color c: Color,
   offset os: Offset,
-  spread_radius sr: Float,
+  spread sr: Float,
 ) -> BoxShadow {
-  BoxShadow(blur_radius: br, color: c, offset: os, spread_radius: sr)
+  BoxShadow(
+    blur: BoxShadowRadiusPx(Px(br)),
+    color: c,
+    offset: os,
+    spread: BoxShadowSpreadPx(Px(sr)),
+  )
 }

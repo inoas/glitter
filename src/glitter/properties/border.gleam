@@ -1,6 +1,8 @@
 import glitter/units/percent.{Percent}
 import glitter/units/px.{Px}
 import glitter/units/rem.{Rem}
+import glitter/units/vh.{Vh}
+import glitter/units/vw.{Vw}
 
 pub type Border {
   Border(
@@ -12,9 +14,20 @@ pub type Border {
 }
 
 pub type BorderUnit {
-  BorderRemUnit(Rem)
   BorderPercentUnit(Percent)
   BorderPxUnit(Px)
+  BorderRemUnit(Rem)
+  BorderVhUnit(Vh)
+  BorderVwUnit(Vw)
+}
+
+pub fn new(
+  left l: BorderUnit,
+  top t: BorderUnit,
+  right r: BorderUnit,
+  bottom b: BorderUnit,
+) -> Border {
+  Border(left: l, top: t, right: r, bottom: b)
 }
 
 pub fn none() -> Border {
@@ -60,13 +73,4 @@ pub fn symmetric_rem(vertical v: Float, horizontal h: Float) -> Border {
     right: BorderRemUnit(Rem(h)),
     bottom: BorderRemUnit(Rem(v)),
   )
-}
-
-pub fn new(
-  left l: BorderUnit,
-  top t: BorderUnit,
-  right r: BorderUnit,
-  bottom b: BorderUnit,
-) -> Border {
-  Border(left: l, top: t, right: r, bottom: b)
 }

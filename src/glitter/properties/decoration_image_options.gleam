@@ -14,6 +14,8 @@ import glitter/atoms/top.{Top}
 import glitter/units/percent.{Percent}
 import glitter/units/px.{Px}
 import glitter/units/rem.{Rem}
+import glitter/units/vh.{Vh}
+import glitter/units/vw.{Vw}
 
 /// TODO:
 /// - gradient
@@ -31,20 +33,6 @@ pub type DecorationImageOptions {
   )
 }
 
-pub fn defaults() {
-  DecorationImageOptions(
-    attachment: FixedAtom(Fixed),
-    position: AttachmentPosition(
-      horizontal_anchor: HorizontalAnchorLeftAtom(Left),
-      horizontal_offset: PositionPxUnit(Px(0.0)),
-      vertical_anchor: VerticalAnchorTopAtom(Top),
-      vertical_offset: PositionPxUnit(Px(0.0)),
-    ),
-    repeat: AttachmentRepeatPair(x: RepeatAtom(Repeat), y: RepeatAtom(Repeat)),
-    size: CoverAtom(Cover),
-  )
-}
-
 pub type Attachment {
   FixedAtom(Fixed)
   ScrollAtom(Scroll)
@@ -52,34 +40,36 @@ pub type Attachment {
 
 pub type AttachmentPosition {
   AttachmentPosition(
-    horizontal_anchor: PositionHorizontalAnchor,
-    horizontal_offset: PositionUnit,
-    vertical_anchor: PositionVerticalAnchor,
-    vertical_offset: PositionUnit,
+    horizontal_anchor: HorizontalAnchorUnit,
+    horizontal_offset: AttachmentPositionUnit,
+    vertical_anchor: VerticalAnchorUnit,
+    vertical_offset: AttachmentPositionUnit,
   )
 }
 
-pub type PositionHorizontalAnchor {
+pub type HorizontalAnchorUnit {
   HorizontalAnchorCenterAtom(Center)
   HorizontalAnchorLeftAtom(Left)
   HorizontalAnchorRightAtom(Right)
 }
 
-pub type PositionVerticalAnchor {
+pub type VerticalAnchorUnit {
   VerticalAnchorBottomAtom(Bottom)
   VerticalAnchorCenterAtom(Center)
   VerticalAnchorTopAtom(Top)
 }
 
-pub type PositionUnit {
-  PositionPercentUnit(Percent)
-  PositionPxUnit(Px)
-  PositionRemUnit(Rem)
+pub type AttachmentPositionUnit {
+  AttachmentPositionPercentUnit(Percent)
+  AttachmentPositionPxUnit(Px)
+  AttachmentPositionRemUnit(Rem)
+  AttachmentPositionVhUnit(Vh)
+  AttachmentPositionVwUnit(Vw)
 }
 
 pub type AttachmentRepeat {
-  AttachmentRepeatPair(x: RepeatUnit, y: RepeatUnit)
-  AttachmentRepeatValue(RepeatUnit)
+  AttachmentRepeatAtomPair(x: RepeatUnit, y: RepeatUnit)
+  AttachmentRepeatAtom(RepeatUnit)
 }
 
 pub type RepeatUnit {
@@ -91,12 +81,31 @@ pub type RepeatUnit {
 
 pub type AttachmentSize {
   CoverAtom(Cover)
-  SizePair(x: SizeUnit, y: SizeUnit)
+  SizePair(x: AttachmentSizeUnit, y: AttachmentSizeUnit)
 }
 
-pub type SizeUnit {
-  SizeAutoAtom(Auto)
-  SizeRemUnit(Rem)
-  SizePxUnit(Px)
-  SizePercentUnit(Percent)
+pub type AttachmentSizeUnit {
+  AttachmentSizeAutoAtom(Auto)
+  AttachmentSizePercentUnit(Percent)
+  AttachmentSizePxUnit(Px)
+  AttachmentSizeRemUnit(Rem)
+  AttachmentSizeVhUnit(Vh)
+  AttachmentSizeVwUnit(Vw)
+}
+
+pub fn defaults() {
+  DecorationImageOptions(
+    attachment: FixedAtom(Fixed),
+    position: AttachmentPosition(
+      horizontal_anchor: HorizontalAnchorLeftAtom(Left),
+      horizontal_offset: AttachmentPositionPxUnit(Px(0.0)),
+      vertical_anchor: VerticalAnchorTopAtom(Top),
+      vertical_offset: AttachmentPositionPxUnit(Px(0.0)),
+    ),
+    repeat: AttachmentRepeatAtomPair(
+      x: RepeatAtom(Repeat),
+      y: RepeatAtom(Repeat),
+    ),
+    size: CoverAtom(Cover),
+  )
 }

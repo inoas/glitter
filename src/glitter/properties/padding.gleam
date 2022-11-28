@@ -1,6 +1,8 @@
 import glitter/units/percent.{Percent}
 import glitter/units/px.{Px}
 import glitter/units/rem.{Rem}
+import glitter/units/vh.{Vh}
+import glitter/units/vw.{Vw}
 
 pub type Padding {
   Padding(
@@ -12,9 +14,11 @@ pub type Padding {
 }
 
 pub type PaddingUnit {
-  PaddingRemUnit(Rem)
   PaddingPercentUnit(Percent)
   PaddingPxUnit(Px)
+  PaddingRemUnit(Rem)
+  PaddingVhUnit(Vh)
+  PaddingVwUnit(Vw)
 }
 
 pub fn none() -> Padding {

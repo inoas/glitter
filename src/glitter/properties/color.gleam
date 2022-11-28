@@ -2,12 +2,7 @@ pub opaque type Color {
   Color(red: Int, green: Int, blue: Int, alpha: Float)
 }
 
-pub fn rgb(color c: Color) -> #(Int, Int, Int) {
-  let Color(red: r, green: g, blue: b, alpha: _a) = c
-  #(r, g, b)
-}
-
-pub fn rgba(color c: Color) -> #(Int, Int, Int, Float) {
+pub fn to_rgba(color c: Color) -> #(Int, Int, Int, Float) {
   let Color(red: r, green: g, blue: b, alpha: a) = c
   #(r, g, b, a)
 }
@@ -33,34 +28,6 @@ pub fn from_rgba(
   {
     True, True, True, True -> Ok(Color(r, g, b, a))
     _, _, _, _ -> Error(Nil)
-  }
-}
-
-pub fn with_red(color c: Color, red r: Int) -> Result(Color, Nil) {
-  case is_valid_rgb_value(r) {
-    True -> Ok(Color(..c, red: r))
-    False -> Error(Nil)
-  }
-}
-
-pub fn with_blue(color c: Color, blue b: Int) -> Result(Color, Nil) {
-  case is_valid_rgb_value(b) {
-    True -> Ok(Color(..c, blue: b))
-    False -> Error(Nil)
-  }
-}
-
-pub fn with_green(color c: Color, green g: Int) -> Result(Color, Nil) {
-  case is_valid_rgb_value(g) {
-    True -> Ok(Color(..c, green: g))
-    False -> Error(Nil)
-  }
-}
-
-pub fn with_alpha(color c: Color, alpha a: Float) -> Result(Color, Nil) {
-  case is_valid_alpha(a) {
-    True -> Ok(Color(..c, alpha: a))
-    False -> Error(Nil)
   }
 }
 
@@ -90,6 +57,34 @@ pub fn blue() {
 
 pub fn faff() {
   Color(red: 255, green: 175, blue: 243, alpha: 1.0)
+}
+
+pub fn with_red(color c: Color, red r: Int) -> Result(Color, Nil) {
+  case is_valid_rgb_value(r) {
+    True -> Ok(Color(..c, red: r))
+    False -> Error(Nil)
+  }
+}
+
+pub fn with_blue(color c: Color, blue b: Int) -> Result(Color, Nil) {
+  case is_valid_rgb_value(b) {
+    True -> Ok(Color(..c, blue: b))
+    False -> Error(Nil)
+  }
+}
+
+pub fn with_green(color c: Color, green g: Int) -> Result(Color, Nil) {
+  case is_valid_rgb_value(g) {
+    True -> Ok(Color(..c, green: g))
+    False -> Error(Nil)
+  }
+}
+
+pub fn with_alpha(color c: Color, alpha a: Float) -> Result(Color, Nil) {
+  case is_valid_alpha(a) {
+    True -> Ok(Color(..c, alpha: a))
+    False -> Error(Nil)
+  }
 }
 
 fn is_valid_rgb_value(rgb_value v: Int) -> Bool {

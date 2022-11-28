@@ -5,7 +5,7 @@ import glitter/atoms/no_repeat.{NoRepeat}
 import glitter/properties/border
 import glitter/properties/box_decoration.{BoxDecoration}
 import glitter/properties/decoration_image_options.{
-  AttachmentRepeatPair, DecorationImageOptions, NoRepeatAtom,
+  AttachmentRepeatAtomPair, DecorationImageOptions, NoRepeatAtom,
 }
 import glitter/properties/decoration_image.{DecorationImage}
 import glitter/properties/padding
@@ -25,7 +25,7 @@ pub fn example() {
             path_or_url: "/foo/bar.png",
             options: DecorationImageOptions(
               ..decoration_image_options.defaults(),
-              repeat: AttachmentRepeatPair(
+              repeat: AttachmentRepeatAtomPair(
                 x: NoRepeatAtom(NoRepeat),
                 y: NoRepeatAtom(NoRepeat),
               ),

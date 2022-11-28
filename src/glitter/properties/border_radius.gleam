@@ -1,6 +1,8 @@
 import glitter/units/percent.{Percent}
 import glitter/units/px.{Px}
 import glitter/units/rem.{Rem}
+import glitter/units/vh.{Vh}
+import glitter/units/vw.{Vw}
 
 pub type BorderRadius {
   BorderRadius(
@@ -12,9 +14,20 @@ pub type BorderRadius {
 }
 
 pub type BorderRadiusUnit {
-  BorderRadiusRemUnit(Rem)
   BorderRadiusPercentUnit(Percent)
   BorderRadiusPxUnit(Px)
+  BorderRadiusRemUnit(Rem)
+  BorderRadiusVhUnit(Vh)
+  BorderRadiusVwUnit(Vw)
+}
+
+pub fn new(
+  left l: BorderRadiusUnit,
+  top t: BorderRadiusUnit,
+  right r: BorderRadiusUnit,
+  bottom b: BorderRadiusUnit,
+) -> BorderRadius {
+  BorderRadius(left: l, top: t, right: r, bottom: b)
 }
 
 pub fn none() -> BorderRadius {
@@ -60,13 +73,4 @@ pub fn symmetric_rem(vertical v: Float, horizontal h: Float) -> BorderRadius {
     right: BorderRadiusRemUnit(Rem(h)),
     bottom: BorderRadiusRemUnit(Rem(v)),
   )
-}
-
-pub fn new(
-  left l: BorderRadiusUnit,
-  top t: BorderRadiusUnit,
-  right r: BorderRadiusUnit,
-  bottom b: BorderRadiusUnit,
-) -> BorderRadius {
-  BorderRadius(left: l, top: t, right: r, bottom: b)
 }
