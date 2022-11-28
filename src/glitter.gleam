@@ -99,8 +99,6 @@ fn container_to_lustre(widget, options) {
 
   let attributes = [lustre_style(styles), ..attributes]
   let widget = to_lustre(widget)
-  // let widget = lustre_text(string.inspect(widget))
-  // let widget = lustre_text(string.inspect(attributes))
   lustre_div(attributes, [widget])
 }
 
