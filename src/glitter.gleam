@@ -54,12 +54,9 @@ fn container_to_lustre(widget, options) {
     width: width,
   ) = options
 
-  let classes = lustre_classes([#("container", True)])
-  let attributes = [classes]
-
-  let styles = [#("display", "flex")]
-
-  // background-color
+  let classes = [#("container", True)]
+  let styles = []
+  // style: background-color
   let background_color_none = color.none()
   let styles = case background_color {
     background_color if background_color == background_color_none -> styles
@@ -68,52 +65,52 @@ fn container_to_lustre(widget, options) {
       ..styles
     ]
   }
-
-  // height
+  // style:  height
   let height_unset = size.unset()
   let styles = case height {
     height if height == height_unset -> styles
     height -> [#("height", size.to_string(height)), ..styles]
   }
-
-  // padding
+  // style: padding
   let padding_unset = padding.unset()
   let styles = case padding {
     padding if padding == padding_unset -> styles
     padding -> [#("padding", padding.to_string(padding)), ..styles]
   }
-
-  // margin
+  // style: margin
   let margin_unset = margin.unset()
   let styles = case margin {
     margin if margin == margin_unset -> styles
     margin -> [#("margin", margin.to_string(margin)), ..styles]
   }
-
-  // width
+  // style: width
   let width_unset = size.unset()
   let styles = case width {
     width if width == width_unset -> styles
     width -> [#("width", size.to_string(width)), ..styles]
   }
 
-  let attributes = [lustre_style(styles), ..attributes]
-  let widget = to_lustre(widget)
-  lustre_div(attributes, [widget])
+  let lustre_attributes = [lustre_style(styles), lustre_classes(classes)]
+  let lustre_children = [to_lustre(widget)]
+  lustre_div(lustre_attributes, lustre_children)
 }
 
 fn column_to_lustre(widgets, options) {
   let ColumnOptions(main_axis_alignment: _main_axis_alignment) = options
-  let attributes = [lustre_classes([#("column", True)])]
-  let widgets = list.map(widgets, to_lustre)
-  lustre_div(attributes, widgets)
+  let classes = [#("column", True)]
+
+  let lustre_attributes = [lustre_classes(classes)]
+  let lustre_children = list.map(widgets, to_lustre)
+  lustre_div(lustre_attributes, lustre_children)
 }
 
 fn row_to_lustre(widgets, options) {
   let RowOptions(main_axis_alignment: _main_axis_alignment) = options
-  let attributes = [lustre_classes([#("row", True)])]
-  let widgets = list.map(widgets, to_lustre)
-  lustre_div(attributes, widgets)
+  let classes = [#("row", True)]
+
+  let lustre_attributes = [lustre_classes(classes)]
+  let lustre_children = list.map(widgets, to_lustre)
+  lustre_div(lustre_attributes, lustre_children)
 }
 
 fn outlined_button_to_lustre(
@@ -123,7 +120,7 @@ fn outlined_button_to_lustre(
   button_to_lustre(
     label: label,
     on_pressed: on_pressed,
-    style_class_name: "outlined-button",
+    button_class_name: "outlined-button",
   )
 }
 
@@ -134,7 +131,7 @@ fn text_button_to_lustre(
   button_to_lustre(
     label: label,
     on_pressed: on_pressed,
-    style_class_name: "text-button",
+    button_class_name: "text-button",
   )
 }
 
@@ -145,20 +142,20 @@ fn elevated_button_to_lustre(
   button_to_lustre(
     label: label,
     on_pressed: on_pressed,
-    style_class_name: "elevated-button",
+    button_class_name: "elevated-button",
   )
 }
 
 fn button_to_lustre(
   label label: String,
   on_pressed on_pressed,
-  style_class_name style_class_name: String,
+  button_class_name button_class_name: String,
 ) {
-  let classes = lustre_classes([#("button", True), #(style_class_name, True)])
-  let attributes = [classes]
-  let attributes = [lustre_on_click(on_pressed), ..attributes]
-  let children = [lustre_text(label)]
-  lustre_button(attributes, children)
+  let classes = [#("button", True), #(button_class_name, True)]
+
+  let lustre_attributes = [lustre_on_click(on_pressed), lustre_classes(classes)]
+  let lustre_children = [lustre_text(label)]
+  lustre_button(lustre_attributes, lustre_children)
 }
 
 pub fn main() {
