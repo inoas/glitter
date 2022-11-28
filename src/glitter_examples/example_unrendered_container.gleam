@@ -9,7 +9,7 @@ import glitter/properties/decoration_image_options.{
 }
 import glitter/properties/decoration_image.{DecorationImage}
 import glitter/properties/padding
-import glitter/widgets/container_options.{ContainerOptions}
+import glitter/options/container_options.{ContainerOptions}
 
 pub fn example() {
   Container(

@@ -13,9 +13,9 @@ import glitter/properties/padding.{
 import glitter/units/percent.{Percent}
 import glitter/units/px.{Px}
 import glitter/units/rem.{Rem}
-import glitter/widgets/column_options.{ColumnOptions}
-import glitter/widgets/container_options.{ContainerOptions}
-import glitter/widgets/row_options.{RowOptions}
+import glitter/options/column_options.{ColumnOptions}
+import glitter/options/container_options.{ContainerOptions}
+import glitter/options/row_options.{RowOptions}
 import lustre/attribute.{classes as lustre_classes, style as lustre_style}
 import lustre/element.{
   button as lustre_button, div as lustre_div, text as lustre_text,

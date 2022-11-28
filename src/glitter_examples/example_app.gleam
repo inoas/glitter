@@ -4,9 +4,9 @@ import glitter.{Column, Container, ElevatedButton, Row, Text}
 import glitter/properties/color
 import glitter/properties/margin
 import glitter/properties/padding
-import glitter/widgets/column_options
-import glitter/widgets/container_options.{ContainerOptions}
-import glitter/widgets/row_options
+import glitter/options/column_options
+import glitter/options/container_options.{ContainerOptions}
+import glitter/options/row_options
 import lustre
 import lustre/cmd
 import lustre/event.{dispatch as lustre_dispatch}
