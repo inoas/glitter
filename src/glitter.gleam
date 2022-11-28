@@ -1,7 +1,6 @@
 import gleam/float
 import gleam/int
 import gleam/list
-import gleam/option.{None, Some}
 import glitter/atoms/auto.{Auto}
 import glitter/properties/color
 import glitter/properties/margin.{
@@ -25,6 +24,9 @@ import lustre/element.{
   button as lustre_button, div as lustre_div, text as lustre_text,
 }
 import lustre/event.{on_click as lustre_on_click}
+import glitter/units/size.{
+  SizeAutoAtom, SizePercentUnit, SizePxUnit, SizeRemUnit, SizeVhUnit, SizeVwUnit,
+}
 
 pub type Widget(action) {
   Text(body: String)
@@ -87,10 +89,23 @@ fn container_to_lustre(widget, options) {
     ]
   }
 
+  let size_to_unit = fn(size) {
+    case size {
+      SizeAutoAtom(Auto) -> "auto"
+      SizePercentUnit(Percent(percent_value)) ->
+        float.to_string(percent_value) <> "%"
+      SizePxUnit(Px(px_value)) -> float.to_string(px_value) <> "px"
+      SizeRemUnit(Rem(rem_value)) -> float.to_string(rem_value) <> "rem"
+      SizeVhUnit(Vh(vh_value)) -> float.to_string(vh_value) <> "vh"
+      SizeVwUnit(Vw(vw_value)) -> float.to_string(vw_value) <> "vw"
+    }
+  }
+
   // height
+  let height_auto = SizeAutoAtom(Auto)
   let styles = case height {
-    None -> styles
-    Some(height) -> [#("height", float.to_string(height) <> "px"), ..styles]
+    height if height == height_auto -> styles
+    height -> [#("height", size_to_unit(height)), ..styles]
   }
 
   // padding
@@ -146,9 +161,10 @@ fn container_to_lustre(widget, options) {
   }
 
   // width
+  let width_auto = SizeAutoAtom(Auto)
   let styles = case width {
-    None -> styles
-    Some(width) -> [#("width", float.to_string(width) <> "px"), ..styles]
+    width if width == width_auto -> styles
+    width -> [#("width", size_to_unit(width)), ..styles]
   }
 
   let attributes = [lustre_style(styles), ..attributes]

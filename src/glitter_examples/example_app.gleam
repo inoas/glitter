@@ -1,5 +1,4 @@
 import gleam/int
-import gleam/option.{Some}
 import glitter.{Column, Container, ElevatedButton, Row, Text}
 import glitter/properties/color
 import glitter/properties/margin
@@ -10,6 +9,7 @@ import glitter/options/row_options
 import lustre
 import lustre/cmd
 import lustre/event.{dispatch as lustre_dispatch}
+import glitter/units/size
 
 pub type Action {
   Incr
@@ -36,10 +36,10 @@ fn render(state) {
       options: ContainerOptions(
         ..container_options.defaults(),
         background_color: color.faff(),
-        height: Some(120.0),
+        height: size.px(120.0),
         padding: padding.all_px(5.0),
         margin: margin.all_px(50.0),
-        width: Some(200.0),
+        width: size.px(200.0),
       ),
       widget: Column(
         options: column_options.defaults(),
