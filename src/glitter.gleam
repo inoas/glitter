@@ -65,7 +65,7 @@ fn container_to_lustre(widget, options) {
       ..styles
     ]
   }
-  // style:  height
+  // style: height
   let height_unset = size.unset()
   let styles = case height {
     height if height == height_unset -> styles
