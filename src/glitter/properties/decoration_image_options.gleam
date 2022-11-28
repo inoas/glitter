@@ -40,20 +40,20 @@ pub type Attachment {
 
 pub type AttachmentPosition {
   AttachmentPosition(
-    horizontal_anchor: HorizontalAnchorUnit,
+    horizontal_anchor: HorizontalAnchor,
     horizontal_offset: AttachmentPositionUnit,
-    vertical_anchor: VerticalAnchorUnit,
+    vertical_anchor: VerticalAnchor,
     vertical_offset: AttachmentPositionUnit,
   )
 }
 
-pub type HorizontalAnchorUnit {
+pub type HorizontalAnchor {
   HorizontalAnchorCenter(Center)
   HorizontalAnchorLeft(Left)
   HorizontalAnchorRight(Right)
 }
 
-pub type VerticalAnchorUnit {
+pub type VerticalAnchor {
   VerticalAnchorBottom(Bottom)
   VerticalAnchorCenter(Center)
   VerticalAnchorTop(Top)
@@ -68,11 +68,11 @@ pub type AttachmentPositionUnit {
 }
 
 pub type AttachmentRepeat {
-  AttachmentRepeatPair(x: RepetitionUnit, y: RepetitionUnit)
-  AttachmentRepeat(RepetitionUnit)
+  AttachmentRepeatPair(x: Repetition, y: Repetition)
+  AttachmentRepeat(Repetition)
 }
 
-pub type RepetitionUnit {
+pub type Repetition {
   RepetitionNoRepeat(NoRepeat)
   RepetitionRepeat(Repeat)
   RepetitionRound(Round)
