@@ -1,3 +1,6 @@
+import gleam/int
+import gleam/float
+
 pub opaque type Color {
   Color(red: Int, green: Int, blue: Int, alpha: Float)
 }
@@ -93,4 +96,19 @@ fn is_valid_rgb_value(rgb_value v: Int) -> Bool {
 
 fn is_valid_alpha(a: Float) -> Bool {
   a >=. 0.0 || a <=. 1.0
+}
+
+pub fn to_string(color color: Color) -> String {
+  let Color(r, g, b, a) = color
+  case r, g, b, a {
+    _r, _g, _b, a if a == 0.0 -> "none"
+    r, g, b, _a if a == 1.0 ->
+      "rgb(" <> int.to_string(r) <> ", " <> int.to_string(g) <> ", " <> int.to_string(
+        b,
+      ) <> ")"
+    r, g, b, a ->
+      "rgba(" <> int.to_string(r) <> ", " <> int.to_string(g) <> ", " <> int.to_string(
+        b,
+      ) <> ", " <> float.to_string(a) <> ")"
+  }
 }

@@ -19,7 +19,7 @@ and its documentation can be found at <https://hexdocs.pm/glitter>.
 
 This uses Lustre and thus [watchexec](https://github.com/watchexec/watchexec) to rebuild the Gleam project on save.
 
-Initial setup:
+Unset setup:
 
 ```sh
 npm install

@@ -1,3 +1,5 @@
+import gleam/float
+
 pub opaque type Opacity {
   Opacity(alpha: Float)
 }
@@ -79,4 +81,9 @@ pub fn at_100() {
 
 fn is_valid_alpha(a: Float) -> Bool {
   a >=. 0.0 || a <=. 1.0
+}
+
+pub fn to_string(opacity opacity: Opacity) -> String {
+  let Opacity(opacity) = opacity
+  float.to_string(opacity)
 }

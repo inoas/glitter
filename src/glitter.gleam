@@ -1,20 +1,8 @@
-import gleam/float
-import gleam/int
 import gleam/io
 import gleam/list
-import glitter/atoms/auto.{Auto}
 import glitter/properties/color
-import glitter/properties/margin.{
-  MarginAuto, MarginPercent, MarginPx, MarginRem, MarginVh, MarginVw,
-}
-import glitter/properties/padding.{
-  PaddingPercent, PaddingPx, PaddingRem, PaddingVh, PaddingVw,
-}
-import glitter/units/percent.{Percent}
-import glitter/units/px.{Px}
-import glitter/units/rem.{Rem}
-import glitter/units/vh.{Vh}
-import glitter/units/vw.{Vw}
+import glitter/properties/margin
+import glitter/properties/padding
 import glitter/options/column_options.{ColumnOptions}
 import glitter/options/container_options.{ContainerOptions}
 import glitter/options/row_options.{RowOptions}
@@ -23,7 +11,7 @@ import lustre/element.{
   button as lustre_button, div as lustre_div, text as lustre_text,
 }
 import lustre/event.{on_click as lustre_on_click}
-import glitter/units/size.{SizeAuto}
+import glitter/units/size
 
 pub type Widget(action) {
   Text(body: String)
@@ -58,7 +46,7 @@ fn text_to_lustre(string) {
 
 fn container_to_lustre(widget, options) {
   let ContainerOptions(
-    background_color: color,
+    background_color: background_color,
     decoration: _decoration,
     height: height,
     margin: margin,
@@ -72,83 +60,40 @@ fn container_to_lustre(widget, options) {
   let styles = [#("display", "flex")]
 
   // background-color
-  let color_none = color.to_rgba(color.none())
-  let styles = case color.to_rgba(color) {
-    color if color == color_none -> styles
-    color -> [
-      #(
-        "backgroundColor",
-        "rgba(" <> int.to_string(color.0) <> ", " <> int.to_string(color.1) <> ", " <> int.to_string(
-          color.2,
-        ) <> ", " <> float.to_string(color.3) <> ")",
-      ),
+  let background_color_none = color.none()
+  let styles = case background_color {
+    background_color if background_color == background_color_none -> styles
+    background_color -> [
+      #("backgroundColor", color.to_string(background_color)),
       ..styles
     ]
   }
 
   // height
-  let height_auto = SizeAuto(Auto)
+  let height_unset = size.unset()
   let styles = case height {
-    height if height == height_auto -> styles
+    height if height == height_unset -> styles
     height -> [#("height", size.to_string(height)), ..styles]
   }
 
   // padding
-  let padding_none = padding.none()
-  let padding_to_unit = fn(padding) {
-    case padding {
-      PaddingPercent(Percent(percent_value)) ->
-        float.to_string(percent_value) <> "%"
-      PaddingPx(Px(px_value)) -> float.to_string(px_value) <> "px"
-      PaddingRem(Rem(rem_value)) -> float.to_string(rem_value) <> "rem"
-      PaddingVh(Vh(vh_value)) -> float.to_string(vh_value) <> "vh"
-      PaddingVw(Vw(vw_value)) -> float.to_string(vw_value) <> "vw"
-    }
-  }
-
+  let padding_unset = padding.unset()
   let styles = case padding {
-    padding if padding == padding_none -> styles
-    padding -> [
-      #(
-        "padding",
-        padding_to_unit(padding.top) <> " " <> padding_to_unit(padding.right) <> " " <> padding_to_unit(
-          padding.bottom,
-        ) <> " " <> padding_to_unit(padding.left),
-      ),
-      ..styles
-    ]
+    padding if padding == padding_unset -> styles
+    padding -> [#("padding", padding.to_string(padding)), ..styles]
   }
 
   // margin
-  let margin_none = margin.none()
-  let margin_to_unit = fn(margin) {
-    case margin {
-      MarginAuto(Auto) -> "auto"
-      MarginPercent(Percent(percent_value)) ->
-        float.to_string(percent_value) <> "%"
-      MarginPx(Px(px_value)) -> float.to_string(px_value) <> "px"
-      MarginRem(Rem(rem_value)) -> float.to_string(rem_value) <> "rem"
-      MarginVh(Vh(vh_value)) -> float.to_string(vh_value) <> "vh"
-      MarginVw(Vw(vw_value)) -> float.to_string(vw_value) <> "vw"
-    }
-  }
+  let margin_unset = margin.unset()
   let styles = case margin {
-    margin if margin == margin_none -> styles
-    margin -> [
-      #(
-        "margin",
-        margin_to_unit(margin.top) <> " " <> margin_to_unit(margin.right) <> " " <> margin_to_unit(
-          margin.bottom,
-        ) <> " " <> margin_to_unit(margin.left),
-      ),
-      ..styles
-    ]
+    margin if margin == margin_unset -> styles
+    margin -> [#("margin", margin.to_string(margin)), ..styles]
   }
 
   // width
-  let width_auto = SizeAuto(Auto)
+  let width_unset = size.unset()
   let styles = case width {
-    width if width == width_auto -> styles
+    width if width == width_unset -> styles
     width -> [#("width", size.to_string(width)), ..styles]
   }
 
