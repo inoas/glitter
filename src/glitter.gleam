@@ -1,5 +1,6 @@
 import gleam/float
 import gleam/int
+import gleam/io
 import gleam/list
 import glitter/atoms/auto.{Auto}
 import glitter/properties/color
@@ -229,4 +230,10 @@ fn button_to_lustre(
   let attributes = [lustre_on_click(on_pressed), ..attributes]
   let children = [lustre_text(label)]
   lustre_button(attributes, children)
+}
+
+pub fn main() {
+  io.println(
+    "Notice: Run `make dev` to start a webserver with an example project!",
+  )
 }
