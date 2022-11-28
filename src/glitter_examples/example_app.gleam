@@ -28,10 +28,8 @@ fn render(state) {
     options: ContainerOptions(
       ..container_options.defaults(),
       background_color: color.black(),
-      margin: margin.with_horizontal_auto(margin.symmetric_px(
-        vertical: 10.0,
-        horizontal: 0.0,
-      )),
+      margin: margin.all_px(8.0)
+      |> margin.with_auto_horizontal(),
       padding: padding.symmetric_px(8.0, 16.0),
     ),
     widget: Container(
@@ -40,7 +38,7 @@ fn render(state) {
         background_color: color.faff(),
         height: Some(120.0),
         padding: padding.all_px(5.0),
-        margin: margin.px(50.0, 50.0, 50.0, 50.0),
+        margin: margin.all_px(50.0),
         width: Some(200.0),
       ),
       widget: Column(
@@ -58,7 +56,7 @@ fn render(state) {
       ),
     ),
   )
-  |> glitter.to_lustre()
+  |> glitter.to_lustre
 }
 
 pub fn main() {

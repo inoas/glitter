@@ -6,16 +6,20 @@ pub type Offset {
   Offset(horizontal: OffsetUnit, vertical: OffsetUnit)
 }
 
+pub type OffsetUnit {
+  OffsetPercentUnit(Percent)
+  OffsetRemUnit(Rem)
+  OffsetPxUnit(Px)
+}
+
 pub fn none() -> Offset {
   Offset(horizontal: OffsetPxUnit(Px(0.0)), vertical: OffsetPxUnit(Px(0.0)))
 }
 
-pub fn new(horizontal x: Float, vertical y: Float) -> Offset {
+pub fn px(horizontal x: Float, vertical y: Float) -> Offset {
   Offset(horizontal: OffsetPxUnit(Px(x)), vertical: OffsetPxUnit(Px(y)))
 }
 
-pub type OffsetUnit {
-  OffsetPercentUnit(Percent)
-  OffsetPxUnit(Px)
-  OffsetRemUnit(Rem)
+pub fn new(horizontal x: OffsetUnit, vertical y: OffsetUnit) -> Offset {
+  Offset(horizontal: x, vertical: y)
 }

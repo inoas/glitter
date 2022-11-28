@@ -20,7 +20,7 @@ pub fn example() {
         padding: padding.all_px(5.0),
         decoration: BoxDecoration(
           ..box_decoration.none(),
-          border: border.all(5.0),
+          border: border.all_px(5.0),
           image: Some(DecorationImage(
             path_or_url: "/foo/bar.png",
             options: DecorationImageOptions(

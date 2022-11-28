@@ -1,7 +1,7 @@
-import glitter/atoms/auto.{Auto}
 import glitter/units/percent.{Percent}
 import glitter/units/px.{Px}
 import glitter/units/rem.{Rem}
+import glitter/atoms/auto.{Auto}
 
 pub type Margin {
   Margin(
@@ -12,26 +12,19 @@ pub type Margin {
   )
 }
 
+pub type MarginUnit {
+  MarginAutoAtom(Auto)
+  MarginRemUnit(Rem)
+  MarginPercentUnit(Percent)
+  MarginPxUnit(Px)
+}
+
 pub fn none() -> Margin {
   Margin(
     left: MarginPxUnit(Px(0.0)),
     top: MarginPxUnit(Px(0.0)),
     right: MarginPxUnit(Px(0.0)),
     bottom: MarginPxUnit(Px(0.0)),
-  )
-}
-
-pub fn px(
-  left l: Float,
-  top t: Float,
-  right r: Float,
-  bottom b: Float,
-) -> Margin {
-  Margin(
-    left: MarginPxUnit(Px(l)),
-    top: MarginPxUnit(Px(t)),
-    right: MarginPxUnit(Px(r)),
-    bottom: MarginPxUnit(Px(b)),
   )
 }
 
@@ -53,28 +46,42 @@ pub fn symmetric_px(vertical v: Float, horizontal h: Float) -> Margin {
   )
 }
 
-pub fn all(l: MarginUnit, t: MarginUnit, r: MarginUnit, b: MarginUnit) -> Margin {
+pub fn all_rem(n: Float) -> Margin {
+  Margin(
+    left: MarginRemUnit(Rem(n)),
+    top: MarginRemUnit(Rem(n)),
+    right: MarginRemUnit(Rem(n)),
+    bottom: MarginRemUnit(Rem(n)),
+  )
+}
+
+pub fn symmetric_rem(vertical v: Float, horizontal h: Float) -> Margin {
+  Margin(
+    left: MarginRemUnit(Rem(h)),
+    top: MarginRemUnit(Rem(v)),
+    right: MarginRemUnit(Rem(h)),
+    bottom: MarginRemUnit(Rem(v)),
+  )
+}
+
+pub fn new(
+  left l: MarginUnit,
+  top t: MarginUnit,
+  right r: MarginUnit,
+  bottom b: MarginUnit,
+) -> Margin {
   Margin(left: l, top: t, right: r, bottom: b)
 }
 
-pub fn horizontal_auto() -> Margin {
-  let foo =
-    Margin(
-      left: MarginAutoAtom(Auto),
-      top: MarginPxUnit(Px(0.0)),
-      right: MarginAutoAtom(Auto),
-      bottom: MarginPxUnit(Px(0.0)),
-    )
-  foo
+pub fn auto_horizontal() -> Margin {
+  Margin(
+    left: MarginAutoAtom(Auto),
+    top: MarginPxUnit(Px(0.0)),
+    right: MarginAutoAtom(Auto),
+    bottom: MarginPxUnit(Px(0.0)),
+  )
 }
 
-pub fn with_horizontal_auto(margin: Margin) -> Margin {
+pub fn with_auto_horizontal(margin: Margin) -> Margin {
   Margin(..margin, left: MarginAutoAtom(Auto), right: MarginAutoAtom(Auto))
-}
-
-pub type MarginUnit {
-  MarginAutoAtom(Auto)
-  MarginRemUnit(Rem)
-  MarginPxUnit(Px)
-  MarginPercentUnit(Percent)
 }
