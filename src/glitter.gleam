@@ -1,42 +1,42 @@
 import gleam/io
 import gleam/list
-import glitter/properties/color
-import glitter/properties/margin
-import glitter/properties/padding
 import glitter/options/column_options.{ColumnOptions}
 import glitter/options/container_options.{ContainerOptions}
 import glitter/options/row_options.{RowOptions}
+import glitter/properties/color
+import glitter/properties/margin
+import glitter/properties/padding
+import glitter/units/size
 import lustre/attribute.{classes as lustre_classes, style as lustre_style}
 import lustre/element.{
   button as lustre_button, div as lustre_div, text as lustre_text,
 }
 import lustre/event.{on_click as lustre_on_click}
-import glitter/units/size
 
 pub type Widget(action) {
-  Text(body: String)
-  Container(widget: Widget(action), options: ContainerOptions)
   Column(widgets: List(Widget(action)), options: ColumnOptions)
-  Row(widgets: List(Widget(action)), options: RowOptions)
-  TextButton(label: String, on_pressed: fn(action) -> Nil)
+  Container(widget: Widget(action), options: ContainerOptions)
   ElevatedButton(label: String, on_pressed: fn(action) -> Nil)
   OutlinedButton(label: String, on_pressed: fn(action) -> Nil)
+  Row(widgets: List(Widget(action)), options: RowOptions)
+  Text(body: String)
+  TextButton(label: String, on_pressed: fn(action) -> Nil)
 }
 
 pub fn to_lustre(widget: Widget(action)) {
   case widget {
-    Text(body: body) -> text_to_lustre(body)
-    Container(widget: widget, options: options) ->
-      container_to_lustre(widget, options)
     Column(widgets: widgets, options: options) ->
       column_to_lustre(widgets, options)
-    Row(widgets: widgets, options: options) -> row_to_lustre(widgets, options)
-    TextButton(label: label, on_pressed: on_pressed) ->
-      text_button_to_lustre(label, on_pressed)
+    Container(widget: widget, options: options) ->
+      container_to_lustre(widget, options)
     ElevatedButton(label: label, on_pressed: on_pressed) ->
       elevated_button_to_lustre(label, on_pressed)
     OutlinedButton(label: label, on_pressed: on_pressed) ->
       outlined_button_to_lustre(label, on_pressed)
+    Row(widgets: widgets, options: options) -> row_to_lustre(widgets, options)
+    Text(body: body) -> text_to_lustre(body)
+    TextButton(label: label, on_pressed: on_pressed) ->
+      text_button_to_lustre(label, on_pressed)
   }
 }
 
@@ -51,6 +51,7 @@ fn container_to_lustre(widget, options) {
     height: height,
     margin: margin,
     padding: padding,
+    semantic_wrapper: _semantic_wrapper,
     width: width,
   ) = options
 

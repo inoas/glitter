@@ -17,6 +17,7 @@ import glitter/properties/color.{Color}
 import glitter/properties/margin.{Margin}
 import glitter/properties/padding.{Padding}
 import glitter/units/size.{Size}
+import glitter/units/wrapper_element.{Div, WrapperElement}
 
 pub type ContainerOptions {
   ContainerOptions(
@@ -25,6 +26,7 @@ pub type ContainerOptions {
     height: Size,
     margin: Margin,
     padding: Padding,
+    semantic_wrapper: WrapperElement,
     width: Size,
   )
 }
@@ -36,6 +38,7 @@ pub fn defaults() {
     height: size.unset(),
     margin: margin.unset(),
     padding: padding.unset(),
+    semantic_wrapper: Div,
     width: size.unset(),
   )
 }
