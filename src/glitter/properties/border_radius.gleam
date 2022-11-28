@@ -14,11 +14,11 @@ pub type BorderRadius {
 }
 
 pub type BorderRadiusUnit {
-  BorderRadiusPercentUnit(Percent)
-  BorderRadiusPxUnit(Px)
-  BorderRadiusRemUnit(Rem)
-  BorderRadiusVhUnit(Vh)
-  BorderRadiusVwUnit(Vw)
+  BorderRadiusPercent(Percent)
+  BorderRadiusPx(Px)
+  BorderRadiusRem(Rem)
+  BorderRadiusVh(Vh)
+  BorderRadiusVw(Vw)
 }
 
 pub fn new(
@@ -32,45 +32,45 @@ pub fn new(
 
 pub fn none() -> BorderRadius {
   BorderRadius(
-    left: BorderRadiusPxUnit(Px(0.0)),
-    top: BorderRadiusPxUnit(Px(0.0)),
-    right: BorderRadiusPxUnit(Px(0.0)),
-    bottom: BorderRadiusPxUnit(Px(0.0)),
+    left: BorderRadiusPx(Px(0.0)),
+    top: BorderRadiusPx(Px(0.0)),
+    right: BorderRadiusPx(Px(0.0)),
+    bottom: BorderRadiusPx(Px(0.0)),
   )
 }
 
 pub fn all_px(n: Float) -> BorderRadius {
   BorderRadius(
-    left: BorderRadiusPxUnit(Px(n)),
-    top: BorderRadiusPxUnit(Px(n)),
-    right: BorderRadiusPxUnit(Px(n)),
-    bottom: BorderRadiusPxUnit(Px(n)),
+    left: BorderRadiusPx(Px(n)),
+    top: BorderRadiusPx(Px(n)),
+    right: BorderRadiusPx(Px(n)),
+    bottom: BorderRadiusPx(Px(n)),
   )
 }
 
 pub fn symmetric_px(vertical v: Float, horizontal h: Float) -> BorderRadius {
   BorderRadius(
-    left: BorderRadiusPxUnit(Px(h)),
-    top: BorderRadiusPxUnit(Px(v)),
-    right: BorderRadiusPxUnit(Px(h)),
-    bottom: BorderRadiusPxUnit(Px(v)),
+    left: BorderRadiusPx(Px(h)),
+    top: BorderRadiusPx(Px(v)),
+    right: BorderRadiusPx(Px(h)),
+    bottom: BorderRadiusPx(Px(v)),
   )
 }
 
 pub fn all_rem(n: Float) -> BorderRadius {
   BorderRadius(
-    left: BorderRadiusRemUnit(Rem(n)),
-    top: BorderRadiusRemUnit(Rem(n)),
-    right: BorderRadiusRemUnit(Rem(n)),
-    bottom: BorderRadiusRemUnit(Rem(n)),
+    left: BorderRadiusRem(Rem(n)),
+    top: BorderRadiusRem(Rem(n)),
+    right: BorderRadiusRem(Rem(n)),
+    bottom: BorderRadiusRem(Rem(n)),
   )
 }
 
 pub fn symmetric_rem(vertical v: Float, horizontal h: Float) -> BorderRadius {
   BorderRadius(
-    left: BorderRadiusRemUnit(Rem(h)),
-    top: BorderRadiusRemUnit(Rem(v)),
-    right: BorderRadiusRemUnit(Rem(h)),
-    bottom: BorderRadiusRemUnit(Rem(v)),
+    left: BorderRadiusRem(Rem(h)),
+    top: BorderRadiusRem(Rem(v)),
+    right: BorderRadiusRem(Rem(h)),
+    bottom: BorderRadiusRem(Rem(v)),
   )
 }

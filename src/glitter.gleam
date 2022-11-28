@@ -4,12 +4,10 @@ import gleam/list
 import glitter/atoms/auto.{Auto}
 import glitter/properties/color
 import glitter/properties/margin.{
-  MarginAuto, MarginPercentUnit, MarginPxUnit, MarginRemUnit, MarginVhUnit,
-  MarginVwUnit,
+  MarginAuto, MarginPercent, MarginPx, MarginRem, MarginVh, MarginVw,
 }
 import glitter/properties/padding.{
-  PaddingPercentUnit, PaddingPxUnit, PaddingRemUnit, PaddingVhUnit,
-  PaddingVwUnit,
+  PaddingPercent, PaddingPx, PaddingRem, PaddingVh, PaddingVw,
 }
 import glitter/units/percent.{Percent}
 import glitter/units/px.{Px}
@@ -25,7 +23,7 @@ import lustre/element.{
 }
 import lustre/event.{on_click as lustre_on_click}
 import glitter/units/size.{
-  SizeAuto, SizePercentUnit, SizePxUnit, SizeRemUnit, SizeVhUnit, SizeVwUnit,
+  SizeAuto, SizePercent, SizePx, SizeRem, SizeVh, SizeVw,
 }
 
 pub type Widget(action) {
@@ -92,12 +90,12 @@ fn container_to_lustre(widget, options) {
   let size_to_unit = fn(size) {
     case size {
       SizeAuto(Auto) -> "auto"
-      SizePercentUnit(Percent(percent_value)) ->
+      SizePercent(Percent(percent_value)) ->
         float.to_string(percent_value) <> "%"
-      SizePxUnit(Px(px_value)) -> float.to_string(px_value) <> "px"
-      SizeRemUnit(Rem(rem_value)) -> float.to_string(rem_value) <> "rem"
-      SizeVhUnit(Vh(vh_value)) -> float.to_string(vh_value) <> "vh"
-      SizeVwUnit(Vw(vw_value)) -> float.to_string(vw_value) <> "vw"
+      SizePx(Px(px_value)) -> float.to_string(px_value) <> "px"
+      SizeRem(Rem(rem_value)) -> float.to_string(rem_value) <> "rem"
+      SizeVh(Vh(vh_value)) -> float.to_string(vh_value) <> "vh"
+      SizeVw(Vw(vw_value)) -> float.to_string(vw_value) <> "vw"
     }
   }
 
@@ -112,12 +110,12 @@ fn container_to_lustre(widget, options) {
   let padding_none = padding.none()
   let padding_to_unit = fn(padding) {
     case padding {
-      PaddingPercentUnit(Percent(percent_value)) ->
+      PaddingPercent(Percent(percent_value)) ->
         float.to_string(percent_value) <> "%"
-      PaddingPxUnit(Px(px_value)) -> float.to_string(px_value) <> "px"
-      PaddingRemUnit(Rem(rem_value)) -> float.to_string(rem_value) <> "rem"
-      PaddingVhUnit(Vh(vh_value)) -> float.to_string(vh_value) <> "vh"
-      PaddingVwUnit(Vw(vw_value)) -> float.to_string(vw_value) <> "vw"
+      PaddingPx(Px(px_value)) -> float.to_string(px_value) <> "px"
+      PaddingRem(Rem(rem_value)) -> float.to_string(rem_value) <> "rem"
+      PaddingVh(Vh(vh_value)) -> float.to_string(vh_value) <> "vh"
+      PaddingVw(Vw(vw_value)) -> float.to_string(vw_value) <> "vw"
     }
   }
 
@@ -139,12 +137,12 @@ fn container_to_lustre(widget, options) {
   let margin_to_unit = fn(margin) {
     case margin {
       MarginAuto(Auto) -> "auto"
-      MarginPercentUnit(Percent(percent_value)) ->
+      MarginPercent(Percent(percent_value)) ->
         float.to_string(percent_value) <> "%"
-      MarginPxUnit(Px(px_value)) -> float.to_string(px_value) <> "px"
-      MarginRemUnit(Rem(rem_value)) -> float.to_string(rem_value) <> "rem"
-      MarginVhUnit(Vh(vh_value)) -> float.to_string(vh_value) <> "vh"
-      MarginVwUnit(Vw(vw_value)) -> float.to_string(vw_value) <> "vw"
+      MarginPx(Px(px_value)) -> float.to_string(px_value) <> "px"
+      MarginRem(Rem(rem_value)) -> float.to_string(rem_value) <> "rem"
+      MarginVh(Vh(vh_value)) -> float.to_string(vh_value) <> "vh"
+      MarginVw(Vw(vw_value)) -> float.to_string(vw_value) <> "vw"
     }
   }
   let styles = case margin {

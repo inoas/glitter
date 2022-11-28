@@ -60,11 +60,11 @@ pub type VerticalAnchorUnit {
 }
 
 pub type AttachmentPositionUnit {
-  AttachmentPositionPercentUnit(Percent)
-  AttachmentPositionPxUnit(Px)
-  AttachmentPositionRemUnit(Rem)
-  AttachmentPositionVhUnit(Vh)
-  AttachmentPositionVwUnit(Vw)
+  AttachmentPositionPercent(Percent)
+  AttachmentPositionPx(Px)
+  AttachmentPositionRem(Rem)
+  AttachmentPositionVh(Vh)
+  AttachmentPositionVw(Vw)
 }
 
 pub type AttachmentRepeat {
@@ -86,11 +86,11 @@ pub type AttachmentSize {
 
 pub type AttachmentSizeUnit {
   AttachmentSizeAuto(Auto)
-  AttachmentSizePercentUnit(Percent)
-  AttachmentSizePxUnit(Px)
-  AttachmentSizeRemUnit(Rem)
-  AttachmentSizeVhUnit(Vh)
-  AttachmentSizeVwUnit(Vw)
+  AttachmentSizePercent(Percent)
+  AttachmentSizePx(Px)
+  AttachmentSizeRem(Rem)
+  AttachmentSizeVh(Vh)
+  AttachmentSizeVw(Vw)
 }
 
 pub fn defaults() {
@@ -98,9 +98,9 @@ pub fn defaults() {
     attachment: AttachmentFixed(Fixed),
     position: AttachmentPosition(
       horizontal_anchor: HorizontalAnchorLeft(Left),
-      horizontal_offset: AttachmentPositionPxUnit(Px(0.0)),
+      horizontal_offset: AttachmentPositionPx(Px(0.0)),
       vertical_anchor: VerticalAnchorTop(Top),
-      vertical_offset: AttachmentPositionPxUnit(Px(0.0)),
+      vertical_offset: AttachmentPositionPx(Px(0.0)),
     ),
     repeat: AttachmentRepeatPair(
       x: RepetitionRepeat(Repeat),

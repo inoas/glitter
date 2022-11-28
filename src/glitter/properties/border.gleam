@@ -14,11 +14,11 @@ pub type Border {
 }
 
 pub type BorderUnit {
-  BorderPercentUnit(Percent)
-  BorderPxUnit(Px)
-  BorderRemUnit(Rem)
-  BorderVhUnit(Vh)
-  BorderVwUnit(Vw)
+  BorderPercent(Percent)
+  BorderPx(Px)
+  BorderRem(Rem)
+  BorderVh(Vh)
+  BorderVw(Vw)
 }
 
 pub fn new(
@@ -32,45 +32,45 @@ pub fn new(
 
 pub fn none() -> Border {
   Border(
-    left: BorderPxUnit(Px(0.0)),
-    top: BorderPxUnit(Px(0.0)),
-    right: BorderPxUnit(Px(0.0)),
-    bottom: BorderPxUnit(Px(0.0)),
+    left: BorderPx(Px(0.0)),
+    top: BorderPx(Px(0.0)),
+    right: BorderPx(Px(0.0)),
+    bottom: BorderPx(Px(0.0)),
   )
 }
 
 pub fn all_px(n: Float) -> Border {
   Border(
-    left: BorderPxUnit(Px(n)),
-    top: BorderPxUnit(Px(n)),
-    right: BorderPxUnit(Px(n)),
-    bottom: BorderPxUnit(Px(n)),
+    left: BorderPx(Px(n)),
+    top: BorderPx(Px(n)),
+    right: BorderPx(Px(n)),
+    bottom: BorderPx(Px(n)),
   )
 }
 
 pub fn symmetric_px(vertical v: Float, horizontal h: Float) -> Border {
   Border(
-    left: BorderPxUnit(Px(h)),
-    top: BorderPxUnit(Px(v)),
-    right: BorderPxUnit(Px(h)),
-    bottom: BorderPxUnit(Px(v)),
+    left: BorderPx(Px(h)),
+    top: BorderPx(Px(v)),
+    right: BorderPx(Px(h)),
+    bottom: BorderPx(Px(v)),
   )
 }
 
 pub fn all_rem(n: Float) -> Border {
   Border(
-    left: BorderRemUnit(Rem(n)),
-    top: BorderRemUnit(Rem(n)),
-    right: BorderRemUnit(Rem(n)),
-    bottom: BorderRemUnit(Rem(n)),
+    left: BorderRem(Rem(n)),
+    top: BorderRem(Rem(n)),
+    right: BorderRem(Rem(n)),
+    bottom: BorderRem(Rem(n)),
   )
 }
 
 pub fn symmetric_rem(vertical v: Float, horizontal h: Float) -> Border {
   Border(
-    left: BorderRemUnit(Rem(h)),
-    top: BorderRemUnit(Rem(v)),
-    right: BorderRemUnit(Rem(h)),
-    bottom: BorderRemUnit(Rem(v)),
+    left: BorderRem(Rem(h)),
+    top: BorderRem(Rem(v)),
+    right: BorderRem(Rem(h)),
+    bottom: BorderRem(Rem(v)),
   )
 }

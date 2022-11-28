@@ -14,55 +14,55 @@ pub type Padding {
 }
 
 pub type PaddingUnit {
-  PaddingPercentUnit(Percent)
-  PaddingPxUnit(Px)
-  PaddingRemUnit(Rem)
-  PaddingVhUnit(Vh)
-  PaddingVwUnit(Vw)
+  PaddingPercent(Percent)
+  PaddingPx(Px)
+  PaddingRem(Rem)
+  PaddingVh(Vh)
+  PaddingVw(Vw)
 }
 
 pub fn none() -> Padding {
   Padding(
-    left: PaddingPxUnit(Px(0.0)),
-    top: PaddingPxUnit(Px(0.0)),
-    right: PaddingPxUnit(Px(0.0)),
-    bottom: PaddingPxUnit(Px(0.0)),
+    left: PaddingPx(Px(0.0)),
+    top: PaddingPx(Px(0.0)),
+    right: PaddingPx(Px(0.0)),
+    bottom: PaddingPx(Px(0.0)),
   )
 }
 
 pub fn all_px(n: Float) -> Padding {
   Padding(
-    left: PaddingPxUnit(Px(n)),
-    top: PaddingPxUnit(Px(n)),
-    right: PaddingPxUnit(Px(n)),
-    bottom: PaddingPxUnit(Px(n)),
+    left: PaddingPx(Px(n)),
+    top: PaddingPx(Px(n)),
+    right: PaddingPx(Px(n)),
+    bottom: PaddingPx(Px(n)),
   )
 }
 
 pub fn symmetric_px(vertical v: Float, horizontal h: Float) -> Padding {
   Padding(
-    left: PaddingPxUnit(Px(h)),
-    top: PaddingPxUnit(Px(v)),
-    right: PaddingPxUnit(Px(h)),
-    bottom: PaddingPxUnit(Px(v)),
+    left: PaddingPx(Px(h)),
+    top: PaddingPx(Px(v)),
+    right: PaddingPx(Px(h)),
+    bottom: PaddingPx(Px(v)),
   )
 }
 
 pub fn all_rem(n: Float) -> Padding {
   Padding(
-    left: PaddingRemUnit(Rem(n)),
-    top: PaddingRemUnit(Rem(n)),
-    right: PaddingRemUnit(Rem(n)),
-    bottom: PaddingRemUnit(Rem(n)),
+    left: PaddingRem(Rem(n)),
+    top: PaddingRem(Rem(n)),
+    right: PaddingRem(Rem(n)),
+    bottom: PaddingRem(Rem(n)),
   )
 }
 
 pub fn symmetric_rem(vertical v: Float, horizontal h: Float) -> Padding {
   Padding(
-    left: PaddingRemUnit(Rem(h)),
-    top: PaddingRemUnit(Rem(v)),
-    right: PaddingRemUnit(Rem(h)),
-    bottom: PaddingRemUnit(Rem(v)),
+    left: PaddingRem(Rem(h)),
+    top: PaddingRem(Rem(v)),
+    right: PaddingRem(Rem(h)),
+    bottom: PaddingRem(Rem(v)),
   )
 }
 

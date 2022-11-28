@@ -9,11 +9,11 @@ pub type Offset {
 }
 
 pub type OffsetUnit {
-  OffsetPercentUnit(Percent)
-  OffsetPxUnit(Px)
-  OffsetRemUnit(Rem)
-  OffsetVhUnit(Vh)
-  OffsetVwUnit(Vw)
+  OffsetPercent(Percent)
+  OffsetPx(Px)
+  OffsetRem(Rem)
+  OffsetVh(Vh)
+  OffsetVw(Vw)
 }
 
 pub fn new(horizontal x: OffsetUnit, vertical y: OffsetUnit) -> Offset {
@@ -21,9 +21,9 @@ pub fn new(horizontal x: OffsetUnit, vertical y: OffsetUnit) -> Offset {
 }
 
 pub fn none() -> Offset {
-  Offset(horizontal: OffsetPxUnit(Px(0.0)), vertical: OffsetPxUnit(Px(0.0)))
+  Offset(horizontal: OffsetPx(Px(0.0)), vertical: OffsetPx(Px(0.0)))
 }
 
 pub fn px(horizontal x: Float, vertical y: Float) -> Offset {
-  Offset(horizontal: OffsetPxUnit(Px(x)), vertical: OffsetPxUnit(Px(y)))
+  Offset(horizontal: OffsetPx(Px(x)), vertical: OffsetPx(Px(y)))
 }

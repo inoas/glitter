@@ -16,19 +16,19 @@ pub type Margin {
 
 pub type MarginUnit {
   MarginAuto(Auto)
-  MarginPercentUnit(Percent)
-  MarginPxUnit(Px)
-  MarginRemUnit(Rem)
-  MarginVhUnit(Vh)
-  MarginVwUnit(Vw)
+  MarginPercent(Percent)
+  MarginPx(Px)
+  MarginRem(Rem)
+  MarginVh(Vh)
+  MarginVw(Vw)
 }
 
 pub fn none() -> Margin {
   Margin(
-    left: MarginPxUnit(Px(0.0)),
-    top: MarginPxUnit(Px(0.0)),
-    right: MarginPxUnit(Px(0.0)),
-    bottom: MarginPxUnit(Px(0.0)),
+    left: MarginPx(Px(0.0)),
+    top: MarginPx(Px(0.0)),
+    right: MarginPx(Px(0.0)),
+    bottom: MarginPx(Px(0.0)),
   )
 }
 
@@ -43,37 +43,37 @@ pub fn new(
 
 pub fn all_px(n: Float) -> Margin {
   Margin(
-    left: MarginPxUnit(Px(n)),
-    top: MarginPxUnit(Px(n)),
-    right: MarginPxUnit(Px(n)),
-    bottom: MarginPxUnit(Px(n)),
+    left: MarginPx(Px(n)),
+    top: MarginPx(Px(n)),
+    right: MarginPx(Px(n)),
+    bottom: MarginPx(Px(n)),
   )
 }
 
 pub fn symmetric_px(vertical v: Float, horizontal h: Float) -> Margin {
   Margin(
-    left: MarginPxUnit(Px(h)),
-    top: MarginPxUnit(Px(v)),
-    right: MarginPxUnit(Px(h)),
-    bottom: MarginPxUnit(Px(v)),
+    left: MarginPx(Px(h)),
+    top: MarginPx(Px(v)),
+    right: MarginPx(Px(h)),
+    bottom: MarginPx(Px(v)),
   )
 }
 
 pub fn all_rem(n: Float) -> Margin {
   Margin(
-    left: MarginRemUnit(Rem(n)),
-    top: MarginRemUnit(Rem(n)),
-    right: MarginRemUnit(Rem(n)),
-    bottom: MarginRemUnit(Rem(n)),
+    left: MarginRem(Rem(n)),
+    top: MarginRem(Rem(n)),
+    right: MarginRem(Rem(n)),
+    bottom: MarginRem(Rem(n)),
   )
 }
 
 pub fn symmetric_rem(vertical v: Float, horizontal h: Float) -> Margin {
   Margin(
-    left: MarginRemUnit(Rem(h)),
-    top: MarginRemUnit(Rem(v)),
-    right: MarginRemUnit(Rem(h)),
-    bottom: MarginRemUnit(Rem(v)),
+    left: MarginRem(Rem(h)),
+    top: MarginRem(Rem(v)),
+    right: MarginRem(Rem(h)),
+    bottom: MarginRem(Rem(v)),
   )
 }
 
@@ -81,9 +81,9 @@ pub fn symmetric_rem(vertical v: Float, horizontal h: Float) -> Margin {
 pub fn auto_horizontal() -> Margin {
   Margin(
     left: MarginAuto(Auto),
-    top: MarginPxUnit(Px(0.0)),
+    top: MarginPx(Px(0.0)),
     right: MarginAuto(Auto),
-    bottom: MarginPxUnit(Px(0.0)),
+    bottom: MarginPx(Px(0.0)),
   )
 }
 
