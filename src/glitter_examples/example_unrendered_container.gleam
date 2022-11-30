@@ -1,8 +1,7 @@
 import gleam/io
 import gleam/option.{Some}
 import glitter.{Container, Text}
-import glitter/atoms/no_repeat.{NoRepeat}
-import glitter/atoms/round.{Round}
+import glitter/atoms.{NoRepeat, Round}
 import glitter/properties/border
 import glitter/properties/box_decoration.{BoxDecoration}
 import glitter/properties/decoration_image.{DecorationImage}

@@ -1,3 +1,0 @@
-pub type Fixed {
-  Fixed
-}

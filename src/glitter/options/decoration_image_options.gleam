@@ -1,16 +1,7 @@
-import glitter/atoms/auto.{Auto}
-import glitter/atoms/bottom.{Bottom}
-import glitter/atoms/center.{Center}
-import glitter/atoms/cover.{Cover}
-import glitter/atoms/fixed.{Fixed}
-import glitter/atoms/left.{Left}
-import glitter/atoms/no_repeat.{NoRepeat}
-import glitter/atoms/repeat.{Repeat}
-import glitter/atoms/right.{Right}
-import glitter/atoms/round.{Round}
-import glitter/atoms/scroll.{Scroll}
-import glitter/atoms/space.{Space}
-import glitter/atoms/top.{Top}
+import glitter/atoms.{
+  Auto, Bottom, Center, Cover, Fixed, Left, NoRepeat, Repeat, Right, Round,
+  Scroll, Space, Top,
+}
 import glitter/units/percent.{Percent}
 import glitter/units/px.{Px}
 import glitter/units/rem.{Rem}

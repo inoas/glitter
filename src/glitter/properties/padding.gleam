@@ -1,5 +1,5 @@
 import gleam/float
-import glitter/atoms/unset.{Unset}
+import glitter/atoms.{Unset}
 import glitter/units/percent.{Percent}
 import glitter/units/px.{Px}
 import glitter/units/rem.{Rem}
