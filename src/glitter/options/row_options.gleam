@@ -6,10 +6,14 @@
 //// See <https://api.flutter.dev/flutter/widgets/Row-class.html>
 ////
 
+import glitter/units/size.{Size, SizeUnset}
+import glitter/atoms/unset.{Unset}
+import glitter/units/wrap_element.{Div, WrapElement}
+
 pub type RowOptions {
-  RowOptions(main_axis_alignment: String)
+  RowOptions(height: Size, width: Size, kind: WrapElement)
 }
 
 pub fn defaults() {
-  RowOptions(main_axis_alignment: "")
+  RowOptions(height: SizeUnset(Unset), width: SizeUnset(Unset), kind: Div)
 }

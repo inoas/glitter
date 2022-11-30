@@ -3,13 +3,21 @@ import gleam/list
 import glitter/options/column_options.{ColumnOptions}
 import glitter/options/container_options.{ContainerOptions}
 import glitter/options/row_options.{RowOptions}
-import glitter/properties/color
-import glitter/properties/margin
-import glitter/properties/padding
-import glitter/units/size
+import glitter/properties/color.{Color}
+import glitter/properties/margin.{Margin}
+import glitter/properties/padding.{Padding}
+import glitter/units/size.{Size}
+import glitter/units/wrap_element.{
+  Address, Article, Aside, Div, Footer, H1, H2, H3, H4, H5, H6, Header, Main,
+  Nav, Section, WrapElement,
+}
 import lustre/attribute.{classes as lustre_classes, style as lustre_style}
 import lustre/element.{
-  button as lustre_button, div as lustre_div, text as lustre_text,
+  address as lustre_address, article as lustre_article, aside as lustre_aside,
+  button as lustre_button, div as lustre_div, footer as lustre_footer,
+  h1 as lustre_h1, h2 as lustre_h2, h3 as lustre_h3, h4 as lustre_h4,
+  h5 as lustre_h5, h6 as lustre_h6, header as lustre_header, main as lustre_main,
+  nav as lustre_nav, section as lustre_section, text as lustre_text,
 }
 import lustre/event.{on_click as lustre_on_click}
 
@@ -17,6 +25,7 @@ pub type Widget(action) {
   Column(widgets: List(Widget(action)), options: ColumnOptions)
   Container(widget: Widget(action), options: ContainerOptions)
   ElevatedButton(label: String, on_pressed: fn(action) -> Nil)
+  NoWidget
   OutlinedButton(label: String, on_pressed: fn(action) -> Nil)
   Row(widgets: List(Widget(action)), options: RowOptions)
   Text(body: String)
@@ -29,6 +38,7 @@ pub fn to_lustre(widget: Widget(action)) {
       column_to_lustre(widgets, options)
     Container(widget: widget, options: options) ->
       container_to_lustre(widget, options)
+    NoWidget -> text_to_lustre("")
     ElevatedButton(label: label, on_pressed: on_pressed) ->
       elevated_button_to_lustre(label, on_pressed)
     OutlinedButton(label: label, on_pressed: on_pressed) ->
@@ -40,78 +50,132 @@ pub fn to_lustre(widget: Widget(action)) {
   }
 }
 
+pub fn call_lustre_element(
+  wrap_ wrap_element: WrapElement,
+  lustre_attributes,
+  lustre_children,
+) {
+  case wrap_element {
+    Address -> lustre_address(lustre_attributes, lustre_children)
+    Article -> lustre_article(lustre_attributes, lustre_children)
+    Aside -> lustre_aside(lustre_attributes, lustre_children)
+    Div -> lustre_div(lustre_attributes, lustre_children)
+    Footer -> lustre_footer(lustre_attributes, lustre_children)
+    H1 -> lustre_h1(lustre_attributes, lustre_children)
+    H2 -> lustre_h2(lustre_attributes, lustre_children)
+    H3 -> lustre_h3(lustre_attributes, lustre_children)
+    H4 -> lustre_h4(lustre_attributes, lustre_children)
+    H5 -> lustre_h5(lustre_attributes, lustre_children)
+    H6 -> lustre_h6(lustre_attributes, lustre_children)
+    Header -> lustre_header(lustre_attributes, lustre_children)
+    Main -> lustre_main(lustre_attributes, lustre_children)
+    Nav -> lustre_nav(lustre_attributes, lustre_children)
+    Section -> lustre_section(lustre_attributes, lustre_children)
+  }
+}
+
 fn text_to_lustre(string) {
   lustre_text(string)
 }
 
-fn container_to_lustre(widget, options) {
-  let ContainerOptions(
-    background_color: background_color,
-    decoration: _decoration,
-    height: height,
-    margin: margin,
-    padding: padding,
-    semantic_wrapper: _semantic_wrapper,
-    width: width,
-  ) = options
-
-  let classes = [#("container", True)]
-  let styles = []
-  // style: background-color
+fn with_background_color(
+  styles: List(#(String, String)),
+  background_color: Color,
+) {
   let background_color_none = color.none()
-  let styles = case background_color {
+  case background_color {
     background_color if background_color == background_color_none -> styles
     background_color -> [
       #("backgroundColor", color.to_string(background_color)),
       ..styles
     ]
   }
-  // style: height
+}
+
+fn with_height(styles: List(#(String, String)), height: Size) {
   let height_unset = size.unset()
-  let styles = case height {
+  case height {
     height if height == height_unset -> styles
     height -> [#("height", size.to_string(height)), ..styles]
   }
-  // style: padding
-  let padding_unset = padding.unset()
-  let styles = case padding {
-    padding if padding == padding_unset -> styles
-    padding -> [#("padding", padding.to_string(padding)), ..styles]
-  }
-  // style: margin
+}
+
+fn with_margin(styles: List(#(String, String)), margin: Margin) {
   let margin_unset = margin.unset()
-  let styles = case margin {
+  case margin {
     margin if margin == margin_unset -> styles
     margin -> [#("margin", margin.to_string(margin)), ..styles]
   }
-  // style: width
+}
+
+fn with_padding(styles: List(#(String, String)), padding: Padding) {
+  let padding_unset = padding.unset()
+  case padding {
+    padding if padding == padding_unset -> styles
+    padding -> [#("padding", padding.to_string(padding)), ..styles]
+  }
+}
+
+fn with_width(styles: List(#(String, String)), width: Size) {
   let width_unset = size.unset()
-  let styles = case width {
+  case width {
     width if width == width_unset -> styles
     width -> [#("width", size.to_string(width)), ..styles]
   }
+}
+
+fn container_to_lustre(widget, options) {
+  // TODO: decoration
+  let ContainerOptions(
+    background_color: background_color,
+    decoration: _decoration,
+    height: height,
+    kind: wrap_element,
+    margin: margin,
+    padding: padding,
+    width: width,
+  ) = options
+
+  let classes = [#("container", True)]
+  let styles =
+    []
+    |> with_background_color(background_color)
+    |> with_height(height)
+    |> with_margin(margin)
+    |> with_padding(padding)
+    |> with_width(width)
 
   let lustre_attributes = [lustre_style(styles), lustre_classes(classes)]
   let lustre_children = [to_lustre(widget)]
-  lustre_div(lustre_attributes, lustre_children)
+  call_lustre_element(wrap_element, lustre_attributes, lustre_children)
 }
 
 fn column_to_lustre(widgets, options) {
-  let ColumnOptions(main_axis_alignment: _main_axis_alignment) = options
-  let classes = [#("column", True)]
+  let ColumnOptions(height: height, kind: wrap_element, width: width) = options
 
-  let lustre_attributes = [lustre_classes(classes)]
+  let classes = [#("column", True)]
+  let styles =
+    []
+    |> with_height(height)
+    |> with_width(width)
+
+  let lustre_attributes = [lustre_style(styles), lustre_classes(classes)]
   let lustre_children = list.map(widgets, to_lustre)
-  lustre_div(lustre_attributes, lustre_children)
+  call_lustre_element(wrap_element, lustre_attributes, lustre_children)
 }
 
 fn row_to_lustre(widgets, options) {
-  let RowOptions(main_axis_alignment: _main_axis_alignment) = options
-  let classes = [#("row", True)]
+  let RowOptions(height: height, kind: wrap_element, width: width) = options
 
-  let lustre_attributes = [lustre_classes(classes)]
+  let classes = [#("row", True)]
+  let styles =
+    []
+    |> with_height(height)
+    |> with_width(width)
+
+  let lustre_attributes = [lustre_style(styles), lustre_classes(classes)]
   let lustre_children = list.map(widgets, to_lustre)
-  lustre_div(lustre_attributes, lustre_children)
+  call_lustre_element(wrap_element, lustre_attributes, lustre_children)
 }
 
 fn outlined_button_to_lustre(

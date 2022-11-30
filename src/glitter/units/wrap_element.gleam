@@ -1,4 +1,4 @@
-pub type WrapperElement {
+pub type WrapElement {
   Article
   Aside
   Div

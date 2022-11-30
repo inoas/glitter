@@ -6,10 +6,14 @@
 //// See <https://api.flutter.dev/flutter/widgets/Column-class.html>
 ////
 
+import glitter/units/size.{Size, SizeUnset}
+import glitter/atoms/unset.{Unset}
+import glitter/units/wrap_element.{Div, WrapElement}
+
 pub type ColumnOptions {
-  ColumnOptions(main_axis_alignment: String)
+  ColumnOptions(height: Size, width: Size, kind: WrapElement)
 }
 
 pub fn defaults() {
-  ColumnOptions(main_axis_alignment: "")
+  ColumnOptions(height: SizeUnset(Unset), width: SizeUnset(Unset), kind: Div)
 }
