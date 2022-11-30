@@ -132,6 +132,26 @@ fn with_gap(
   }
 }
 
+fn with_row_reverse_flex_direction(
+  styles: List(#(String, String)),
+  reverse_flow: Bool,
+) {
+  case reverse_flow {
+    False -> styles
+    True -> [#("flexDirection", "row-reverse"), ..styles]
+  }
+}
+
+fn with_column_reverse_flex_direction(
+  styles: List(#(String, String)),
+  reverse_flow: Bool,
+) {
+  case reverse_flow {
+    False -> styles
+    True -> [#("flexDirection", "column-reverse"), ..styles]
+  }
+}
+
 fn with_flex_wrap(styles: List(#(String, String)), wrap: FlexWrap) {
   case wrap {
     FlexNoWrap -> styles
@@ -197,6 +217,7 @@ fn column_to_lustre(widgets, options) {
     kind: box_element,
     margin: margin,
     padding: padding,
+    reversed: column_reverse_flex_direction,
     width: width,
     wrap: flex_wrap,
   ) = options
@@ -210,6 +231,7 @@ fn column_to_lustre(widgets, options) {
     |> with_height(height)
     |> with_margin(margin)
     |> with_padding(padding)
+    |> with_column_reverse_flex_direction(column_reverse_flex_direction)
     |> with_width(width)
 
   let lustre_attributes = [lustre_style(styles), lustre_classes(classes)]
@@ -228,6 +250,7 @@ fn row_to_lustre(widgets, options) {
     kind: box_element,
     margin: margin,
     padding: padding,
+    reversed: row_reverse_flex_direction,
     width: width,
     wrap: flex_wrap,
   ) = options
@@ -241,6 +264,7 @@ fn row_to_lustre(widgets, options) {
     |> with_height(height)
     |> with_margin(margin)
     |> with_padding(padding)
+    |> with_row_reverse_flex_direction(row_reverse_flex_direction)
     |> with_width(width)
 
   let lustre_attributes = [lustre_style(styles), lustre_classes(classes)]

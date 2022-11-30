@@ -43,6 +43,7 @@ fn render(state) {
           width: SizePercent(Percent(100.0)),
           background_color: color.green(),
           wrap: FlexWrap,
+          reversed: True,
         ),
         widgets: [
           Container(
