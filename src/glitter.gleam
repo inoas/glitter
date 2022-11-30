@@ -6,7 +6,7 @@ import glitter/options/row_options.{RowOptions}
 import glitter/properties/color.{Color}
 import glitter/properties/margin.{Margin}
 import glitter/properties/padding.{Padding}
-import glitter/size.{Size}
+import glitter/unit.{Unit}
 import glitter/flex_wrap.{FlexNoWrap, FlexWrap, FlexWrapReverse}
 import glitter/box_element.{
   Address, Article, Aside, BoxElement, Div, Footer, H1, H2, H3, H4, H5, H6,
@@ -93,40 +93,40 @@ fn with_background_color(
   }
 }
 
-fn with_height(styles: List(#(String, String)), height: Size) {
-  case height == size.unset() {
+fn with_height(styles: List(#(String, String)), height: Unit) {
+  case height == unit.unset() {
     True -> styles
-    False -> [#("height", size.to_string(height)), ..styles]
+    False -> [#("height", unit.to_string(height)), ..styles]
   }
 }
 
 fn with_gap(
   styles: List(#(String, String)),
-  gap: Size,
-  gap_x: Size,
-  gap_y: Size,
+  gap: Unit,
+  gap_x: Unit,
+  gap_y: Unit,
 ) {
-  let gap_unset = size.unset()
+  let gap_unset = unit.unset()
   io.debug(#(gap != gap_unset, gap_x != gap_unset, gap_y != gap_unset))
   case gap != gap_unset, gap_x != gap_unset, gap_y != gap_unset {
     False, False, False -> styles
-    False, False, True -> [#("rowGap", size.to_string(gap_y)), ..styles]
-    False, True, False -> [#("columnGap", size.to_string(gap_x)), ..styles]
+    False, False, True -> [#("rowGap", unit.to_string(gap_y)), ..styles]
+    False, True, False -> [#("columnGap", unit.to_string(gap_x)), ..styles]
     False, True, True -> [
-      #("gap", size.to_string(gap_y) <> " " <> size.to_string(gap_x)),
+      #("gap", unit.to_string(gap_y) <> " " <> unit.to_string(gap_x)),
       ..styles
     ]
-    True, False, False -> [#("gap", size.to_string(gap)), ..styles]
+    True, False, False -> [#("gap", unit.to_string(gap)), ..styles]
     True, False, True -> [
-      #("gap", size.to_string(gap) <> " " <> size.to_string(gap_x)),
+      #("gap", unit.to_string(gap) <> " " <> unit.to_string(gap_x)),
       ..styles
     ]
     True, True, False -> [
-      #("gap", size.to_string(gap_y) <> " " <> size.to_string(gap)),
+      #("gap", unit.to_string(gap_y) <> " " <> unit.to_string(gap)),
       ..styles
     ]
     True, True, True -> [
-      #("gap", size.to_string(gap_y) <> " " <> size.to_string(gap_x)),
+      #("gap", unit.to_string(gap_y) <> " " <> unit.to_string(gap_x)),
       ..styles
     ]
   }
@@ -174,10 +174,10 @@ fn with_padding(styles: List(#(String, String)), padding: Padding) {
   }
 }
 
-fn with_width(styles: List(#(String, String)), width: Size) {
-  case width == size.unset() {
+fn with_width(styles: List(#(String, String)), width: Unit) {
+  case width == unit.unset() {
     True -> styles
-    False -> [#("width", size.to_string(width)), ..styles]
+    False -> [#("width", unit.to_string(width)), ..styles]
   }
 }
 

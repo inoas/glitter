@@ -16,18 +16,18 @@ import glitter/properties/box_decoration.{BoxDecoration}
 import glitter/properties/color.{Color}
 import glitter/properties/margin.{Margin}
 import glitter/properties/padding.{Padding}
-import glitter/size.{Size}
+import glitter/unit.{Unit}
 import glitter/box_element.{BoxElement, Div}
 
 pub type ContainerOptions {
   ContainerOptions(
     background_color: Color,
     decoration: BoxDecoration,
-    height: Size,
+    height: Unit,
     kind: BoxElement,
     margin: Margin,
     padding: Padding,
-    width: Size,
+    width: Unit,
   )
 }
 
@@ -35,10 +35,10 @@ pub fn defaults() {
   ContainerOptions(
     background_color: color.none(),
     decoration: box_decoration.none(),
-    height: size.unset(),
+    height: unit.unset(),
     kind: Div,
     margin: margin.unset(),
     padding: padding.unset(),
-    width: size.unset(),
+    width: unit.unset(),
   )
 }

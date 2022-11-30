@@ -12,21 +12,21 @@ import glitter/properties/box_decoration.{BoxDecoration}
 import glitter/properties/color.{Color}
 import glitter/properties/margin.{Margin}
 import glitter/properties/padding.{Padding}
-import glitter/size.{Size}
+import glitter/unit.{Unit}
 
 pub type RowOptions {
   RowOptions(
     background_color: Color,
     decoration: BoxDecoration,
-    gap: Size,
-    gap_x: Size,
-    gap_y: Size,
-    height: Size,
+    gap: Unit,
+    gap_x: Unit,
+    gap_y: Unit,
+    height: Unit,
     kind: BoxElement,
     margin: Margin,
     padding: Padding,
     reversed: Bool,
-    width: Size,
+    width: Unit,
     wrap: FlexWrap,
   )
 }
@@ -35,15 +35,15 @@ pub fn defaults() {
   RowOptions(
     background_color: color.none(),
     decoration: box_decoration.none(),
-    gap: size.unset(),
-    gap_x: size.unset(),
-    gap_y: size.unset(),
-    height: size.unset(),
+    gap: unit.unset(),
+    gap_x: unit.unset(),
+    gap_y: unit.unset(),
+    height: unit.unset(),
     kind: Div,
     margin: margin.unset(),
     padding: padding.unset(),
     reversed: False,
-    width: size.unset(),
+    width: unit.unset(),
     wrap: FlexNoWrap,
   )
 }

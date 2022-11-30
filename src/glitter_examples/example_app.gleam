@@ -9,7 +9,7 @@ import glitter/options/row_options.{RowOptions}
 import glitter/properties/color
 import glitter/properties/margin
 import glitter/properties/padding
-import glitter/size.{SizeAuto, SizePercent, SizePx}
+import glitter/unit.{UnitAuto, UnitPercent, UnitPx}
 import glitter/units/percent.{Percent}
 import glitter/units/px.{Px}
 import lustre
@@ -32,15 +32,15 @@ fn render(state) {
   Column(
     options: ColumnOptions(
       ..column_options.defaults(),
-      width: SizeAuto(Auto),
+      width: UnitAuto(Auto),
       background_color: color.red(),
     ),
     widgets: [
       Row(
         options: RowOptions(
           ..row_options.defaults(),
-          gap: SizePx(Px(50.0)),
-          width: SizePercent(Percent(100.0)),
+          gap: UnitPx(Px(50.0)),
+          width: UnitPercent(Percent(100.0)),
           background_color: color.green(),
           wrap: FlexWrap,
         ),
@@ -64,7 +64,7 @@ fn render(state) {
               ..container_options.defaults(),
               background_color: color.blue(),
             ),
-            // width: SizePercent(Percent(100.0)),
+            // width: UnitPercent(Percent(100.0)),
             widget: Text("Tail"),
           ),
           Container(
@@ -72,7 +72,7 @@ fn render(state) {
               ..container_options.defaults(),
               background_color: color.blue(),
               padding: padding.symmetric_px(8.0, 16.0),
-              width: SizePercent(Percent(100.0)),
+              width: UnitPercent(Percent(100.0)),
             ),
             widget: NoWidget,
           ),
@@ -91,7 +91,7 @@ fn render(state) {
           options: ContainerOptions(
             ..container_options.defaults(),
             background_color: color.faff(),
-            height: size.px(120.0),
+            height: unit.px(120.0),
             padding: padding.all_px(5.0),
             margin: margin.all_px(50.0),
           ),
