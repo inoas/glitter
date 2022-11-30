@@ -24,9 +24,9 @@ pub type ContainerOptions {
     background_color: Color,
     decoration: BoxDecoration,
     height: Size,
+    kind: WrapElement,
     margin: Margin,
     padding: Padding,
-    kind: WrapElement,
     width: Size,
   )
 }
@@ -36,9 +36,9 @@ pub fn defaults() {
     background_color: color.none(),
     decoration: box_decoration.none(),
     height: size.unset(),
+    kind: Div,
     margin: margin.unset(),
     padding: padding.unset(),
-    kind: Div,
     width: size.unset(),
   )
 }

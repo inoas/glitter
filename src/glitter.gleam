@@ -125,7 +125,6 @@ fn with_width(styles: List(#(String, String)), width: Size) {
 }
 
 fn container_to_lustre(widget, options) {
-  // TODO: decoration
   let ContainerOptions(
     background_color: background_color,
     decoration: _decoration,
@@ -151,12 +150,23 @@ fn container_to_lustre(widget, options) {
 }
 
 fn column_to_lustre(widgets, options) {
-  let ColumnOptions(height: height, kind: wrap_element, width: width) = options
+  let ColumnOptions(
+    background_color: background_color,
+    decoration: _decoration,
+    height: height,
+    kind: wrap_element,
+    margin: margin,
+    padding: padding,
+    width: width,
+  ) = options
 
   let classes = [#("column", True)]
   let styles =
     []
+    |> with_background_color(background_color)
     |> with_height(height)
+    |> with_margin(margin)
+    |> with_padding(padding)
     |> with_width(width)
 
   let lustre_attributes = [lustre_style(styles), lustre_classes(classes)]
@@ -165,12 +175,23 @@ fn column_to_lustre(widgets, options) {
 }
 
 fn row_to_lustre(widgets, options) {
-  let RowOptions(height: height, kind: wrap_element, width: width) = options
+  let RowOptions(
+    background_color: background_color,
+    decoration: _decoration,
+    height: height,
+    kind: wrap_element,
+    margin: margin,
+    padding: padding,
+    width: width,
+  ) = options
 
   let classes = [#("row", True)]
   let styles =
     []
+    |> with_background_color(background_color)
     |> with_height(height)
+    |> with_margin(margin)
+    |> with_padding(padding)
     |> with_width(width)
 
   let lustre_attributes = [lustre_style(styles), lustre_classes(classes)]

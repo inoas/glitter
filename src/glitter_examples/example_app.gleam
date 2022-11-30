@@ -3,19 +3,20 @@ import gleam/option.{Some}
 import glitter.{Column, Container, ElevatedButton, NoWidget, Row, Text}
 import glitter/atoms/no_repeat.{NoRepeat}
 import glitter/atoms/round.{Round}
-import glitter/options/column_options
+import glitter/options/column_options.{ColumnOptions}
 import glitter/options/container_options.{ContainerOptions}
 import glitter/options/decoration_image_options.{
   AttachmentRepeats, DecorationImageOptions, RepetitionNoRepeat, RepetitionRound,
 }
-import glitter/options/row_options
+import glitter/options/row_options.{RowOptions}
 import glitter/properties/border
 import glitter/properties/box_decoration.{BoxDecoration}
 import glitter/properties/color
 import glitter/properties/decoration_image.{DecorationImage}
 import glitter/properties/margin
 import glitter/properties/padding
-import glitter/units/size
+import glitter/units/size.{SizePercent}
+import glitter/units/percent.{Percent}
 import lustre
 import lustre/cmd
 import lustre/event.{dispatch as lustre_dispatch}
@@ -35,10 +36,18 @@ fn update(state, action) {
 
 fn render(state) {
   Column(
-    options: column_options.defaults(),
+    options: ColumnOptions(
+      ..column_options.defaults(),
+      width: SizePercent(Percent(100.0)),
+      background_color: color.red(),
+    ),
     widgets: [
       Row(
-        options: row_options.defaults(),
+        options: RowOptions(
+          ..row_options.defaults(),
+          width: SizePercent(Percent(100.0)),
+          background_color: color.green(),
+        ),
         widgets: [
           Container(
             options: ContainerOptions(

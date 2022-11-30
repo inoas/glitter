@@ -6,14 +6,33 @@
 //// See <https://api.flutter.dev/flutter/widgets/Row-class.html>
 ////
 
-import glitter/units/size.{Size, SizeUnset}
-import glitter/atoms/unset.{Unset}
+import glitter/properties/box_decoration.{BoxDecoration}
+import glitter/properties/color.{Color}
+import glitter/properties/margin.{Margin}
+import glitter/properties/padding.{Padding}
+import glitter/units/size.{Size}
 import glitter/units/wrap_element.{Div, WrapElement}
 
 pub type RowOptions {
-  RowOptions(height: Size, width: Size, kind: WrapElement)
+  RowOptions(
+    background_color: Color,
+    decoration: BoxDecoration,
+    height: Size,
+    kind: WrapElement,
+    margin: Margin,
+    padding: Padding,
+    width: Size,
+  )
 }
 
 pub fn defaults() {
-  RowOptions(height: SizeUnset(Unset), width: SizeUnset(Unset), kind: Div)
+  RowOptions(
+    background_color: color.none(),
+    decoration: box_decoration.none(),
+    height: size.unset(),
+    kind: Div,
+    margin: margin.unset(),
+    padding: padding.unset(),
+    width: size.unset(),
+  )
 }
