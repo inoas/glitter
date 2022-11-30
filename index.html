@@ -3,14 +3,20 @@
   <head>
     <title>Glitter Demo</title>
     <style>
-      html, body {
+      html,
+      body {
         margin: 0;
         padding: 0;
         font-family: sans-serif;
       }
+      #app,
+      .container {
+        display: block;
+      }
       .column,
       .row {
         display: flex;
+				/* flex-wrap: wrap; */
       }
       .column {
         flex-direction: column;
@@ -24,7 +30,7 @@
         margin-top: 1.67px;
         margin-bottom: 1.33px;
         cursor: pointer;
-        background: rgba(127,127,127, .33)
+        background: rgba(127, 127, 127, 0.33);
       }
       .button.text-button {
         background: none;
@@ -35,7 +41,7 @@
         border: 1px solid black;
       }
       .button.elevated-button {
-        background: rgba(36, 160, 237, 1.0);
+        background: rgba(36, 160, 237, 1);
         border: 1.5px solid rgba(255, 255, 255, 0.2);
         box-shadow: 0px 1px 1.5px 0.5px rgba(0, 0, 0, 0.2);
       }

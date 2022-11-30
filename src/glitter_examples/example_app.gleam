@@ -7,8 +7,9 @@ import glitter/options/row_options.{RowOptions}
 import glitter/properties/color
 import glitter/properties/margin
 import glitter/properties/padding
-import glitter/size.{SizeAuto, SizePercent}
+import glitter/size.{SizeAuto, SizePercent, SizePx}
 import glitter/units/percent.{Percent}
+import glitter/units/px.{Px}
 import glitter/wrap_element.{Main}
 import lustre
 import lustre/cmd
@@ -37,6 +38,7 @@ fn render(state) {
       Row(
         options: RowOptions(
           ..row_options.defaults(),
+          gap: SizePx(Px(50.0)),
           width: SizePercent(Percent(100.0)),
           background_color: color.green(),
         ),
@@ -51,7 +53,7 @@ fn render(state) {
           Container(
             options: ContainerOptions(
               ..container_options.defaults(),
-              background_color: color.green(),
+              background_color: color.faff(),
             ),
             widget: Text("Search"),
           ),
@@ -59,6 +61,16 @@ fn render(state) {
             options: ContainerOptions(
               ..container_options.defaults(),
               background_color: color.blue(),
+            ),
+            // width: SizePercent(Percent(100.0)),
+            widget: Text("Tail"),
+          ),
+          Container(
+            options: ContainerOptions(
+              ..container_options.defaults(),
+              background_color: color.blue(),
+              padding: padding.symmetric_px(8.0, 16.0),
+              width: SizePercent(Percent(100.0)),
             ),
             widget: NoWidget,
           ),

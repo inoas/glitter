@@ -17,6 +17,9 @@ pub type RowOptions {
   RowOptions(
     background_color: Color,
     decoration: BoxDecoration,
+    gap: Size,
+    gap_x: Size,
+    gap_y: Size,
     height: Size,
     kind: WrapElement,
     margin: Margin,
@@ -29,6 +32,9 @@ pub fn defaults() {
   RowOptions(
     background_color: color.none(),
     decoration: box_decoration.none(),
+    gap: size.unset(),
+    gap_x: size.unset(),
+    gap_y: size.unset(),
     height: size.unset(),
     kind: Div,
     margin: margin.unset(),

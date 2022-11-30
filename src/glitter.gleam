@@ -93,34 +93,62 @@ fn with_background_color(
 }
 
 fn with_height(styles: List(#(String, String)), height: Size) {
-  let height_unset = size.unset()
-  case height {
-    height if height == height_unset -> styles
-    height -> [#("height", size.to_string(height)), ..styles]
+  case height == size.unset() {
+    True -> styles
+    False -> [#("height", size.to_string(height)), ..styles]
+  }
+}
+
+fn with_gap(
+  styles: List(#(String, String)),
+  gap: Size,
+  gap_x: Size,
+  gap_y: Size,
+) {
+  let gap_unset = size.unset()
+  io.debug(#(gap != gap_unset, gap_x != gap_unset, gap_y != gap_unset))
+  case gap != gap_unset, gap_x != gap_unset, gap_y != gap_unset {
+    False, False, False -> styles
+    False, False, True -> [#("rowGap", size.to_string(gap_y)), ..styles]
+    False, True, False -> [#("columnGap", size.to_string(gap_x)), ..styles]
+    False, True, True -> [
+      #("gap", size.to_string(gap_y) <> " " <> size.to_string(gap_x)),
+      ..styles
+    ]
+    True, False, False -> [#("gap", size.to_string(gap)), ..styles]
+    True, False, True -> [
+      #("gap", size.to_string(gap) <> " " <> size.to_string(gap_x)),
+      ..styles
+    ]
+    True, True, False -> [
+      #("gap", size.to_string(gap_y) <> " " <> size.to_string(gap)),
+      ..styles
+    ]
+    True, True, True -> [
+      #("gap", size.to_string(gap_y) <> " " <> size.to_string(gap_x)),
+      ..styles
+    ]
   }
 }
 
 fn with_margin(styles: List(#(String, String)), margin: Margin) {
-  let margin_unset = margin.unset()
-  case margin {
-    margin if margin == margin_unset -> styles
-    margin -> [#("margin", margin.to_string(margin)), ..styles]
+  case margin == margin.unset() {
+    True -> styles
+    False -> [#("margin", margin.to_string(margin)), ..styles]
   }
 }
 
 fn with_padding(styles: List(#(String, String)), padding: Padding) {
-  let padding_unset = padding.unset()
-  case padding {
-    padding if padding == padding_unset -> styles
-    padding -> [#("padding", padding.to_string(padding)), ..styles]
+  case padding == padding.unset() {
+    True -> styles
+    False -> [#("padding", padding.to_string(padding)), ..styles]
   }
 }
 
 fn with_width(styles: List(#(String, String)), width: Size) {
-  let width_unset = size.unset()
-  case width {
-    width if width == width_unset -> styles
-    width -> [#("width", size.to_string(width)), ..styles]
+  case width == size.unset() {
+    True -> styles
+    False -> [#("width", size.to_string(width)), ..styles]
   }
 }
 
@@ -153,6 +181,9 @@ fn column_to_lustre(widgets, options) {
   let ColumnOptions(
     background_color: background_color,
     decoration: _decoration,
+    gap: gap,
+    gap_x: gap_x,
+    gap_y: gap_y,
     height: height,
     kind: wrap_element,
     margin: margin,
@@ -164,6 +195,7 @@ fn column_to_lustre(widgets, options) {
   let styles =
     []
     |> with_background_color(background_color)
+    |> with_gap(gap, gap_x, gap_y)
     |> with_height(height)
     |> with_margin(margin)
     |> with_padding(padding)
@@ -178,6 +210,9 @@ fn row_to_lustre(widgets, options) {
   let RowOptions(
     background_color: background_color,
     decoration: _decoration,
+    gap: gap,
+    gap_x: gap_x,
+    gap_y: gap_y,
     height: height,
     kind: wrap_element,
     margin: margin,
@@ -189,6 +224,7 @@ fn row_to_lustre(widgets, options) {
   let styles =
     []
     |> with_background_color(background_color)
+    |> with_gap(gap, gap_x, gap_y)
     |> with_height(height)
     |> with_margin(margin)
     |> with_padding(padding)
