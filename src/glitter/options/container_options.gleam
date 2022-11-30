@@ -16,8 +16,8 @@ import glitter/properties/box_decoration.{BoxDecoration}
 import glitter/properties/color.{Color}
 import glitter/properties/margin.{Margin}
 import glitter/properties/padding.{Padding}
-import glitter/units/size.{Size}
-import glitter/units/wrap_element.{Div, WrapElement}
+import glitter/size.{Size}
+import glitter/wrap_element.{Div, WrapElement}
 
 pub type ContainerOptions {
   ContainerOptions(

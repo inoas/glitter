@@ -6,8 +6,8 @@ import glitter/options/row_options.{RowOptions}
 import glitter/properties/color.{Color}
 import glitter/properties/margin.{Margin}
 import glitter/properties/padding.{Padding}
-import glitter/units/size.{Size}
-import glitter/units/wrap_element.{
+import glitter/size.{Size}
+import glitter/wrap_element.{
   Address, Article, Aside, Div, Footer, H1, H2, H3, H4, H5, H6, Header, Main,
   Nav, Section, WrapElement,
 }

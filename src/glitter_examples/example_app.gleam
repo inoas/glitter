@@ -7,9 +7,9 @@ import glitter/options/row_options.{RowOptions}
 import glitter/properties/color
 import glitter/properties/margin
 import glitter/properties/padding
+import glitter/size.{SizeAuto, SizePercent}
 import glitter/units/percent.{Percent}
-import glitter/units/size.{SizeAuto, SizePercent}
-import glitter/units/wrap_element.{Main}
+import glitter/wrap_element.{Main}
 import lustre
 import lustre/cmd
 import lustre/event.{dispatch as lustre_dispatch}
