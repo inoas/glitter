@@ -7,9 +7,10 @@ import glitter/properties/color.{Color}
 import glitter/properties/margin.{Margin}
 import glitter/properties/padding.{Padding}
 import glitter/size.{Size}
-import glitter/wrap_element.{
-  Address, Article, Aside, Div, Footer, H1, H2, H3, H4, H5, H6, Header, Main,
-  Nav, Section, WrapElement,
+import glitter/flex_wrap.{FlexNoWrap, FlexWrap, FlexWrapReverse}
+import glitter/box_element.{
+  Address, Article, Aside, BoxElement, Div, Footer, H1, H2, H3, H4, H5, H6,
+  Header, Main, Nav, Section,
 }
 import lustre/attribute.{classes as lustre_classes, style as lustre_style}
 import lustre/element.{
@@ -51,11 +52,11 @@ pub fn to_lustre(widget: Widget(action)) {
 }
 
 pub fn call_lustre_element(
-  wrap_ wrap_element: WrapElement,
+  wrap_ box_element: BoxElement,
   lustre_attributes,
   lustre_children,
 ) {
-  case wrap_element {
+  case box_element {
     Address -> lustre_address(lustre_attributes, lustre_children)
     Article -> lustre_article(lustre_attributes, lustre_children)
     Aside -> lustre_aside(lustre_attributes, lustre_children)
@@ -131,6 +132,14 @@ fn with_gap(
   }
 }
 
+fn with_flex_wrap(styles: List(#(String, String)), wrap: FlexWrap) {
+  case wrap {
+    FlexNoWrap -> styles
+    FlexWrap -> [#("flexWrap", "wrap"), ..styles]
+    FlexWrapReverse -> [#("flexWrap", "wrapReverse"), ..styles]
+  }
+}
+
 fn with_margin(styles: List(#(String, String)), margin: Margin) {
   case margin == margin.unset() {
     True -> styles
@@ -157,7 +166,7 @@ fn container_to_lustre(widget, options) {
     background_color: background_color,
     decoration: _decoration,
     height: height,
-    kind: wrap_element,
+    kind: box_element,
     margin: margin,
     padding: padding,
     width: width,
@@ -174,7 +183,7 @@ fn container_to_lustre(widget, options) {
 
   let lustre_attributes = [lustre_style(styles), lustre_classes(classes)]
   let lustre_children = [to_lustre(widget)]
-  call_lustre_element(wrap_element, lustre_attributes, lustre_children)
+  call_lustre_element(box_element, lustre_attributes, lustre_children)
 }
 
 fn column_to_lustre(widgets, options) {
@@ -185,16 +194,18 @@ fn column_to_lustre(widgets, options) {
     gap_x: gap_x,
     gap_y: gap_y,
     height: height,
-    kind: wrap_element,
+    kind: box_element,
     margin: margin,
     padding: padding,
     width: width,
+    wrap: flex_wrap,
   ) = options
 
   let classes = [#("column", True)]
   let styles =
     []
     |> with_background_color(background_color)
+    |> with_flex_wrap(flex_wrap)
     |> with_gap(gap, gap_x, gap_y)
     |> with_height(height)
     |> with_margin(margin)
@@ -203,7 +214,7 @@ fn column_to_lustre(widgets, options) {
 
   let lustre_attributes = [lustre_style(styles), lustre_classes(classes)]
   let lustre_children = list.map(widgets, to_lustre)
-  call_lustre_element(wrap_element, lustre_attributes, lustre_children)
+  call_lustre_element(box_element, lustre_attributes, lustre_children)
 }
 
 fn row_to_lustre(widgets, options) {
@@ -214,16 +225,18 @@ fn row_to_lustre(widgets, options) {
     gap_x: gap_x,
     gap_y: gap_y,
     height: height,
-    kind: wrap_element,
+    kind: box_element,
     margin: margin,
     padding: padding,
     width: width,
+    wrap: flex_wrap,
   ) = options
 
   let classes = [#("row", True)]
   let styles =
     []
     |> with_background_color(background_color)
+    |> with_flex_wrap(flex_wrap)
     |> with_gap(gap, gap_x, gap_y)
     |> with_height(height)
     |> with_margin(margin)
@@ -232,7 +245,7 @@ fn row_to_lustre(widgets, options) {
 
   let lustre_attributes = [lustre_style(styles), lustre_classes(classes)]
   let lustre_children = list.map(widgets, to_lustre)
-  call_lustre_element(wrap_element, lustre_attributes, lustre_children)
+  call_lustre_element(box_element, lustre_attributes, lustre_children)
 }
 
 fn outlined_button_to_lustre(

@@ -17,14 +17,14 @@ import glitter/properties/color.{Color}
 import glitter/properties/margin.{Margin}
 import glitter/properties/padding.{Padding}
 import glitter/size.{Size}
-import glitter/wrap_element.{Div, WrapElement}
+import glitter/box_element.{BoxElement, Div}
 
 pub type ContainerOptions {
   ContainerOptions(
     background_color: Color,
     decoration: BoxDecoration,
     height: Size,
-    kind: WrapElement,
+    kind: BoxElement,
     margin: Margin,
     padding: Padding,
     width: Size,

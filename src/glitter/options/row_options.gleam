@@ -6,12 +6,13 @@
 //// See <https://api.flutter.dev/flutter/widgets/Row-class.html>
 ////
 
+import glitter/flex_wrap.{FlexNoWrap, FlexWrap}
 import glitter/properties/box_decoration.{BoxDecoration}
 import glitter/properties/color.{Color}
 import glitter/properties/margin.{Margin}
 import glitter/properties/padding.{Padding}
 import glitter/size.{Size}
-import glitter/wrap_element.{Div, WrapElement}
+import glitter/box_element.{BoxElement, Div}
 
 pub type RowOptions {
   RowOptions(
@@ -21,10 +22,11 @@ pub type RowOptions {
     gap_x: Size,
     gap_y: Size,
     height: Size,
-    kind: WrapElement,
+    kind: BoxElement,
     margin: Margin,
     padding: Padding,
     width: Size,
+    wrap: FlexWrap,
   )
 }
 
@@ -40,5 +42,6 @@ pub fn defaults() {
     margin: margin.unset(),
     padding: padding.unset(),
     width: size.unset(),
+    wrap: FlexNoWrap,
   )
 }

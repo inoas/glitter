@@ -10,7 +10,8 @@ import glitter/properties/padding
 import glitter/size.{SizeAuto, SizePercent, SizePx}
 import glitter/units/percent.{Percent}
 import glitter/units/px.{Px}
-import glitter/wrap_element.{Main}
+import glitter/box_element.{Main}
+import glitter/flex_wrap.{FlexWrap}
 import lustre
 import lustre/cmd
 import lustre/event.{dispatch as lustre_dispatch}
@@ -41,6 +42,7 @@ fn render(state) {
           gap: SizePx(Px(50.0)),
           width: SizePercent(Percent(100.0)),
           background_color: color.green(),
+          wrap: FlexWrap,
         ),
         widgets: [
           Container(
