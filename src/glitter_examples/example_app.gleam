@@ -1,6 +1,8 @@
 import gleam/int
 import glitter.{Column, Container, ElevatedButton, NoWidget, Row, Text}
 import glitter/atoms.{Auto}
+import glitter/box_element.{Main}
+import glitter/flex_wrap.{FlexWrap}
 import glitter/options/column_options.{ColumnOptions}
 import glitter/options/container_options.{ContainerOptions}
 import glitter/options/row_options.{RowOptions}
@@ -10,8 +12,6 @@ import glitter/properties/padding
 import glitter/size.{SizeAuto, SizePercent, SizePx}
 import glitter/units/percent.{Percent}
 import glitter/units/px.{Px}
-import glitter/box_element.{Main}
-import glitter/flex_wrap.{FlexWrap}
 import lustre
 import lustre/cmd
 import lustre/event.{dispatch as lustre_dispatch}
